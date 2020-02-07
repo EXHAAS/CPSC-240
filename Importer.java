@@ -17,13 +17,13 @@ public class Importer
 {
     
     //LinkedList<String>
-    public static LinkedList<String> Import() throws IOException
+    public static LinkedList<String> Import(String directory) throws IOException
     //We discussed using LinkedList, but can be changed to ArrayList if better
     {
       
       
-      String directory; //file that scnr reads from, warehouseDB.txt
-      directory = "warehouseDB.txt";
+      //String directory; //file that scnr reads from, warehouseDB.txt
+      //directory = "warehouseDB.txt"; Typical default
       
       LinkedList<String> items = new LinkedList<String>(); //main parts list
                                                            //if no file or txt

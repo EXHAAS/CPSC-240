@@ -26,8 +26,7 @@ public class SearchBikePartList
 		for (BikePart currentPart : bPLinkedList) 
 		
 		{
-			String currentPartNumber = currentPart.getNumber();
-			if (currentPartNumber.equals(bPNumber)) 
+			if (currentPart.getNumber().equals(bPNumber)) 
 			{
 				 part = currentPart;
 				

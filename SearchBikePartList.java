@@ -11,7 +11,7 @@ public class SearchBikePartList
 {
 /**
  *
- *This is a method that takes a LinkedList of BikePart objects and a name corresponding to the name field of 
+ *This is a method that takes a LinkedList of BikePart objects and a number corresponding to the number field of 
  *a BikePart in the given LinkedList. It iterates through the LinkedList and returns the BikePart whos's part number field 
  *is equal to the given string.
  *

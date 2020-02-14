@@ -17,7 +17,7 @@ public class Importer
 {
     
     //LinkedList<String>
-    public static LinkedList<String> Import(String directory) throws IOException
+    public static LinkedList<BikePart> Import(String directory) throws IOException
     //We discussed using LinkedList, but can be changed to ArrayList if better
     {
       
@@ -25,9 +25,18 @@ public class Importer
       //String directory; //file that scnr reads from, warehouseDB.txt
       //directory = "warehouseDB.txt"; Typical default
       
-      LinkedList<String> items = new LinkedList<String>(); //main parts list
+      LinkedList<BikePart> items = new LinkedList<BikePart>(); //main parts list
                                                            //if no file or txt
-                                                           //will return empty 
+      //needed for conversion                                                     //will return empty 
+      String raw = " ";
+      String[] rawList;
+      
+      BikePart part;
+      long b1;
+      double b2;
+      double b3;
+      boolean b4 = true;
+      int b5;
       
       
       int flag = 0; //flag is used to determine what state something is in
@@ -46,7 +55,26 @@ public class Importer
       try {      //try block to check for end of file
           
       while (flag == 0) {
-         items.addLast(scnr.nextLine()); 
+         //items.addLast(scnr.nextLine()); 
+         raw = scnr.nextLine();
+         rawList = raw.split(",");
+         b1 = (long) Double.parseDouble(rawList[1]);
+         b2 = Double.parseDouble(rawList[2]);
+         b3 = Double.parseDouble(rawList[3]);
+         if (rawList[4].equals("false") || rawList[4].equals("False")){
+        b4 = false;    
+        }
+         if (rawList[4].equals("true") || rawList[4].equals("True")){
+        b4 = true;    
+        }
+        b5 = (int) Double.parseDouble(rawList[5]); 
+        
+         part = new BikePart(rawList[0],b1,b2,b3,b4,b5); 
+         items.addLast(part);
+         
+         //items.addLast()
+         
+         
           
         }
           

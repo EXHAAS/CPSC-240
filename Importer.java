@@ -69,7 +69,7 @@ public class Importer
         }
         b5 = (int) Double.parseDouble(rawList[5]); 
         
-         part = new BikePart(rawList[0],b1,b2,b3,b4,b5); 
+         part = new BikePart(rawList[0],rawList[1],b2,b3,b4,b5); 
          items.addLast(part);
          
          //items.addLast()

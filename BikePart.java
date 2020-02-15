@@ -7,7 +7,7 @@
 
 public class BikePart{
    private String name;
-   private long number;
+   private String number;
    private double listPrice;
    private double salesPrice;
    private boolean onSale;   
@@ -32,14 +32,14 @@ public class BikePart{
 /**
 *@param n The BikePart number being set
 */   
-   public void setNumber(long n){
+   public void setNumber(String n){
       this.number = n;
    }
    
 /**
 *@return the BikePart number
 */   
-   public long getNumber(){
+   public String getNumber(){
       return number;
    }
 
@@ -104,14 +104,14 @@ public class BikePart{
 */   
    public void printInfo(){
       System.out.println(name + "," + number + "," + listPrice + "," + salesPrice
-      + "," + onSale);
+      + "," + onSale + "," + quantity);
    }
 
 /**
 *Returns the part's info as a String
 */   
    public String getInfo(){
-      return name + "," + number + "," + listPrice + "," + salesPrice + "," + onSale;
+      return name + "," + number + "," + listPrice + "," + salesPrice + "," + onSale + "," + quantity;
    }
 }
 

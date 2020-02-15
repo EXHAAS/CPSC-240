@@ -21,14 +21,17 @@ public class Writer
     /**
      * Constructor for objects of class Writer
      */
-    public static void Write(String outputDirectory, LinkedList<String> items) throws IOException
+    public static void Write(String outputDirectory, LinkedList<BikePart> items) throws IOException
     //We discussed using LinkedList, but can be changed to ArrayList if better
     {
      
      PrintWriter out = new PrintWriter(outputDirectory);
      
-     ListIterator<String> itemsIt = items.listIterator();
+     ListIterator<BikePart> itemsIt = items.listIterator();
      
+     BikePart currentPart;
+     String output;
+     //itemsIt[0];
      int flag = 0;
      int aqq = 0;
      
@@ -40,7 +43,14 @@ public class Writer
       //System.out.println(itemsIt.next());
       try { //try block to check for end of file
         while (flag == 0) {
-         out.println(itemsIt.next());
+         //
+         currentPart = itemsIt.next();
+         
+         //output = (currentPart.getNumber() + "," +);
+         out.println(currentPart.getName() + "," + currentPart.getNumber() + "," + currentPart.getListPrice() + "," + currentPart.getSalesPrice() + "," + currentPart.getOnSale() + "," + currentPart.getQuantity());
+        // out.print(currentPart.getListPrice());
+         //out.print(currentPart.getListPrice());
+         //out.println(itemsIt.next().getNumber());
          aqq = aqq + 1;
         }
         //out.println(items.last);

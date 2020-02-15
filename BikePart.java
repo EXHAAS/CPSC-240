@@ -7,13 +7,21 @@
 
 public class BikePart{
    private String name;
-   private String number;
+   private long number;
    private double listPrice;
    private double salesPrice;
    private boolean onSale;   
    private int quantity;
 
-//USING THE DEFAULT CONSTRUCTOR
+   public BikePart (String name, long number, double listPrice, double salesPrice,
+   boolean onSale, int quantity){
+    this.name = name;
+    this.number = number;
+    this.listPrice = listPrice;
+    this.salesPrice = salesPrice;
+    this.onSale = onSale; 
+    this.quantity = quantity; 
+    }
 
 /**
 *@param n The name to be set
@@ -32,14 +40,14 @@ public class BikePart{
 /**
 *@param n The BikePart number being set
 */   
-   public void setNumber(String n){
+   public void setNumber(long n){
       this.number = n;
    }
    
 /**
 *@return the BikePart number
 */   
-   public String getNumber(){
+   public long getNumber(){
       return number;
    }
 
@@ -111,7 +119,7 @@ public class BikePart{
 *Returns the part's info as a String
 */   
    public String getInfo(){
-      return name + "," + number + "," + listPrice + "," + salesPrice + "," + onSale + "," + quantity;
+      return name + "," + number + "," + listPrice + "," + salesPrice + "," + onSale;
    }
 }
 

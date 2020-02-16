@@ -13,10 +13,10 @@ public class ReadInventory
 {
 /**
  * Method that compares the contents of the main warehouse file with the contents of an inventory file with their contents expressed
- * LinkedList<BikePart>. when an item from the inventory file is present in the warehouse file the warehouse file's version of said
+ * in LinkedLists of BikeParts. when an item from the inventory file is present in the warehouse file the warehouse file's version of said
  * item is updated with the price, sale, quantity data from the inventory files version. If the item is not found in the warehouse
  * file the item is add to the warehouse file LinkedList.
- * @param bikeLL This is a Linked<BikePart> that gets it contents from them main "warehouse.txt" file.
+ * @param bikeLL This is a LinkedList of BikeParts that gets it contents from them main "warehouse.txt" file.
  * @param scnr reads user input for file path.
  * @return returns the updated LinkedList.
  * @throws IOException

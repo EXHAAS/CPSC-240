@@ -1,10 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 /**
 *CPSC-240
@@ -16,25 +13,24 @@ import java.util.List;
 public class SortName 
 {
 /**
- * Method to sort lines from the warehouseDB.txt file by name, and print out the sorted list.
- * 
+ * Method to sort BikePart info by name, and prints out the sorted list.
+ * @param bPLList LinkedList of BikePart derived from the warehouseDB.txt file and any possible additions from other inventory files.
  * @throws FileNotFoundException
  * @throws IOException
  */
-	public static void sortName() throws FileNotFoundException, IOException 
+	public static void sortName(LinkedList<BikePart> bPLList) 
 	{
 				
-		BufferedReader warehouseBR = new BufferedReader(new FileReader("warehouseDB.txt"));
-		List<String> warehouseList = new ArrayList<String>();
-		String line;
 
-// Loop where each line in "warehouseBR" is added to the ArrayList "warehouseList".
-		while((line = warehouseBR.readLine()) != null) 
+		List<String> warehouseList = new ArrayList<String>();
+
+// Loop where each BikePart in bPLList evokes the getInfo method, and the returned string is added to warehouseList.
+		for(BikePart bP: bPLList) 
 		{
-		    warehouseList.add(line);
+		    warehouseList.add(bP.getInfo());
 		}
 
-// "warehouseList" is sorted alphabetically ignoring case.
+// "warehouseList" is sorted lexicographically ignoring case.
 		Collections.sort(warehouseList, String.CASE_INSENSITIVE_ORDER);
 
 // Loop where every item in "warehouseList" is printed out.
@@ -45,7 +41,7 @@ public class SortName
 	       List<String> itemAsList = Arrays.asList(itemArray);
 			System.out.println(itemAsList +"\n"); 
 		 }
-		warehouseBR.close();
+
 	
 	}
 

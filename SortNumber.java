@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 /**
 *CPSC-240
@@ -27,23 +25,22 @@ public class SortNumber
 		}
     
 /**
- * 	Method that sorts lines in the "warehousDB.txt" file by part number, and then prints out the sorted lines.
- * @throws IOException
+ * 
+ * 	Method that sorts BikeParts in the BikePart LinkedList by part number, and then prints out the sorted lines.
+ * @param bPLList LinkedList of BikePart derived from the warehouseDB.txt file and any possible additions from other inventory files.
  */
-	public static void sortNumber()throws IOException 
+	public static void sortNumber(LinkedList<BikePart> bPLList) 
 	    {
 		
-			BufferedReader warehouseBR = new BufferedReader(new FileReader("warehouseDB.txt"));
+
 			List<String> warehouseStringArrayList = new ArrayList<String>();
 
-			String line;
 
-// Loop were each line in warehouseBR is added to warehouseStringArrayList.			
-			while((line = warehouseBR.readLine()) != null) 
-			{
-				warehouseStringArrayList.add(line);
+// Loop were each BikePart evokes the getInfo method, and the returned string is added to warehouseStringArrayList.			
+
+			for(BikePart bP: bPLList) {
+				warehouseStringArrayList.add(bP.getInfo());
 			}
-
 			List<String> warehouseArrayList = new ArrayList<String>();
 
 // Loop were each string in warehouseStringArrayList is split up into an Array.
@@ -66,7 +63,6 @@ public class SortNumber
 			{
 	            System.out.print( item +"\n\n"); 		
 			}
-			warehouseBR.close();
+
 	    }
-}
-		
+}		

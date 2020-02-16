@@ -26,7 +26,7 @@ public class ReadInventory
 		System.out.println("Input file path");
 		String inventoryFileName = scnr.next();
 
-		LinkedList<BikePart> inventoryLL = Importer.Import(inventoryFileName);
+		LinkedList<BikePart> inventoryLL = Importer.Import(inventoryFileName,1);
 		Boolean notPresent = true;
 		for(BikePart iBP: inventoryLL) 
 		{

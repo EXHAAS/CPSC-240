@@ -32,13 +32,12 @@ public class EnterSellDisplay{
 	
 	
 
-      public static void enterPart(Scanner s, LinkedList<BikePart> l){
-      System.out.println("Enter the part's name:");
+	public static void enterPart(Scanner s, LinkedList<BikePart> l){
+	  System.out.println("Enter the part's name:");
       String name = s.next();
       System.out.println("How many are there?");
       
       String quantityString = s.next();
-// When flag is equal to 1 the user input is checked to see if it is an integer.
       int flag = 1;
       String qInput = inputCheck(quantityString, flag);
       if(qInput == null) {
@@ -46,7 +45,7 @@ public class EnterSellDisplay{
     	return;
       }
       int quantity = Integer.parseInt(quantityString);
-      BikePart temp = searchBikePartList(l, name);
+      BikePart temp = SearchBikePartList.searchBikePartList(l, name);
       if(temp != null){
          System.out.println("The part was already in the system.");
          int var1 = temp.getQuantity();
@@ -55,7 +54,7 @@ public class EnterSellDisplay{
          System.out.println("Enter the part's number:");
          String number = s.next();
          System.out.println("Enter the part's list price:");
- // When flag is equal to 2 the user input is checked to see if it is an integer.        
+         
          flag = 2;
          String lPriceString = s.next();
          String lPInput = inputCheck(lPriceString, flag);
@@ -110,7 +109,7 @@ public class EnterSellDisplay{
       System.out.println("Enter the part's number: ");
       String number = s.next();
       
-      BikePart temp = searchBikePartList(l, number);
+      BikePart temp = SearchBikePartList.searchBikePartList(l, number);
       if(temp != null){
          System.out.println(temp.getName());
          temp.setQuantity(temp.getQuantity() - 1);
@@ -143,7 +142,7 @@ public class EnterSellDisplay{
       System.out.println("Enter the name of the part:");
       String name = s.next();
       
-      BikePart temp = searchBikePartList(l, name);
+      BikePart temp = SearchBikePartList.searchBikePartList(l, name);
       if(temp != null){
          System.out.println("The name is: " + temp.getName());
          if(temp.getOnSale() == true){
@@ -165,36 +164,6 @@ public class EnterSellDisplay{
 *  @author  Anthony Tompkins
 */
 
-/**
- *
- *This is a method that takes a LinkedList of BikePart objects and a name or number corresponding to the name or number field of 
- *a BikePart in the given LinkedList. It iterates through the LinkedList and returns the BikePart whos's part name or number field 
- *is equal to the given string.
- *
- * @param bPLinkedList This parameter is the LinkedList that is being searched through.
- * @param bPNameOrNumber This parameter is the part number or name of the BikePart that is being looked for.
- * @return Returns BikePart named "part".
- */
-	public static BikePart searchBikePartList(LinkedList<BikePart> bPLinkedList, String bPNameOrNumber)
-	{
-		BikePart part = null;
- 		
-		for (BikePart currentPart : bPLinkedList) 
-		
-		{
-			if (currentPart.getName().equals(bPNameOrNumber)) 
-			{
-				 part = currentPart;
-			}
-			else if (currentPart.getNumber().equals(bPNameOrNumber)) 
-			{
-				 part = currentPart;
-			}
-
-		}
-		return part;
-  } 
-  
 
 /**
  * Method to check if user input is valid.
@@ -240,3 +209,4 @@ public class EnterSellDisplay{
 		return input;
 	}
 }
+

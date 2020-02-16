@@ -16,7 +16,7 @@ public class MainMethod{
    
 	public static void main(String[] args)throws IOException{
 	  String warehouseFileName = "warehouseDB.txt";
-	 LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName);
+	 LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName,0);
 	   
 	  Scanner reader = new Scanner(System.in);
       boolean loop = true;

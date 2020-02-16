@@ -32,7 +32,6 @@ public class Importer
       String[] rawList;
       
       BikePart part;
-      long b1;
       double b2;
       double b3;
       boolean b4 = true;
@@ -58,13 +57,12 @@ public class Importer
          //items.addLast(scnr.nextLine()); 
          raw = scnr.nextLine();
          rawList = raw.split(",");
-         b1 = (long) Double.parseDouble(rawList[1]);
          b2 = Double.parseDouble(rawList[2]);
          b3 = Double.parseDouble(rawList[3]);
-         if (rawList[4].equals("false") || rawList[4].equals("False")){
+         if (rawList[4].toUpperCase().equals("FALSE")){
         b4 = false;    
         }
-         if (rawList[4].equals("true") || rawList[4].equals("True")){
+         if (rawList[4].toUpperCase().equals("TRUE")){
         b4 = true;    
         }
         b5 = (int) Double.parseDouble(rawList[5]); 
@@ -91,7 +89,8 @@ public class Importer
       
     }
     catch (java.io.FileNotFoundException exception){
-      flag = writeEmptyFile (directory); //Will Create a blank new file
+    System.out.println("File Not Found \n\n");  
+    flag = writeEmptyFile (directory); //Will Create a blank new file
                                          //if file does not exist
       //System.out.println(items); //--InternalTesting--
       //System.out.println("CaughtNoFile"); //--InternalTesting--

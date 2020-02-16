@@ -7,7 +7,8 @@ import java.util.LinkedList;
 *
 *  @author  Anthony Tompkins
 */
-
+public class SearchBikePartList
+{
 /**
  *
  *This is a method that takes a LinkedList of BikePart objects and a name or number corresponding to the name or number field of 
@@ -37,3 +38,4 @@ import java.util.LinkedList;
 		}
 		return part;
   } 
+}

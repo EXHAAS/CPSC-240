@@ -1,10 +1,24 @@
 //THE MAIN METHOD FOR PROJECT 1
-
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.List;
+
 public class MainMethod{
-   public static void main(String[] args){
-      Scanner reader = new Scanner(System.in);
+   
+	public static void main(String[] args)throws IOException{
+	  String warehouseFileName = "warehouseDB.txt";
+	 LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName);
+	   
+	  Scanner reader = new Scanner(System.in);
       boolean loop = true;
 //CALL SOME METHOD TO GET THE LINKEDLIST FROM THE INVENTORY FILE SO IT CAN SEND IT
 //TO ALL THE SEPERATE METHODS
@@ -29,39 +43,52 @@ public class MainMethod{
          switch(choice.toUpperCase()){
             case "READ":
                System.out.println("You want to read a file!");
+               bikeLL = ReadInventory.readInventory(bikeLL, reader);              
                break;
+
             case "ENTER":
-               //enterPart(reader, inventory);
+               EnterSellDisplay.enterPart(reader, bikeLL);
                System.out.println("You want to enter a part!");
-               break;
+                break;                          
+            
             case "SELL":
-               //sellPart(reader, inventory);
+               EnterSellDisplay.sellPart(reader, bikeLL);
                System.out.println("You want to sell a part!");
                break;
+ 
             case "DISPLAY":
-               //displayPart(reader, inventory);
+            	EnterSellDisplay.displayPart(reader, bikeLL);
                System.out.println("You want to display a part!");
                break;
+ 
             case "SORTNAME":
                //CALL THE SORTNAME METHOD
                System.out.println("You want to sort by name!");
+               SortName.sortName(bikeLL);
                break;
+
             case "SORTNUMBER":
                //CALL THE SORTNUMBER METHOD
                System.out.println("You want to sort by number!");
+               SortNumber.sortNumber(bikeLL);
                break;
+ 
             case "QUIT":
                //CALL THE QUIT METHOD
                System.out.println("You want to quit!");
                loop = false;
                break;               
+
             default:
                //NONE OF THESE WERE CHOSEN
-               System.out.println("You entered invalid information");
-               loop = false;
+               System.out.println("Please enter a valid command \n\n");
                break;
             }
          }         
-         //USE THE WRITER CLASS TO WRITE THE LINKEDLIST TO A FILE     
+      //USE THE WRITER CLASS TO WRITE THE LINKEDLIST TO A FILE     
+      Writer.Write(warehouseFileName, bikeLL);
+      reader.close();   
+
+      
    }
 }

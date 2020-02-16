@@ -1,12 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
-import java.io.PrintWriter;
 import java.io.FileOutputStream;
 import java.util.LinkedList;
-import java.util.ListIterator;
 /**
  * CPSC 240 Project 1 Importer Class 
  *
@@ -17,11 +13,11 @@ public class Importer
 {
     
     //LinkedList<String>
-    public static LinkedList<BikePart> Import(String directory) throws IOException
+    public static LinkedList<BikePart> Import(String directory, int state) throws IOException
     //We discussed using LinkedList, but can be changed to ArrayList if better
     {
       
-      
+      Boolean noException = true;
       //String directory; //file that scnr reads from, warehouseDB.txt
       //directory = "warehouseDB.txt"; Typical default
       
@@ -89,16 +85,33 @@ public class Importer
       
     }
     catch (java.io.FileNotFoundException exception){
-    System.out.println("File Not Found \n\n");  
+    
+    if(state == 0) {
+    System.out.println("warehouseDB.txt created \n\n");  
     flag = writeEmptyFile (directory); //Will Create a blank new file
                                          //if file does not exist
       //System.out.println(items); //--InternalTesting--
       //System.out.println("CaughtNoFile"); //--InternalTesting--
-    }      //catch block to check for file existing
-      return items;  
+    }      //catch block to check for file existing  
+    else {
+    	 System.out.println("File Not Found \n\n");
+    }
+    noException = false;
+    }
+      
+    if(state == 1) {
+    	if(noException) {
+    		System.out.println("The warehouse list has been updated \n\n");
+    	}
+    }
+    else {
+    	if(noException) {
+    		System.out.println("warehouseDB.txt was found \n\n");
+    	}
+    }
+    return items;  
       //items = list;
     }
-    
     public static int writeEmptyFile (String directory) throws IOException
    {
      FileOutputStream fileOut= new FileOutputStream(directory);

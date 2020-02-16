@@ -15,8 +15,6 @@ public class SortName
 /**
  * Method to sort BikePart info by name, and prints out the sorted list.
  * @param bPLList LinkedList of BikePart derived from the warehouseDB.txt file and any possible additions from other inventory files.
- * @throws FileNotFoundException
- * @throws IOException
  */
 	public static void sortName(LinkedList<BikePart> bPLList) 
 	{

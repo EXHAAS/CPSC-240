@@ -7,29 +7,31 @@ import java.util.LinkedList;
 *
 *  @author  Anthony Tompkins
 */
-public class SearchBikePartList 
-{
+
 /**
  *
- *This is a method that takes a LinkedList of BikePart objects and a number corresponding to the number field of 
- *a BikePart in the given LinkedList. It iterates through the LinkedList and returns the BikePart whos's part number field 
+ *This is a method that takes a LinkedList of BikePart objects and a name or number corresponding to the name or number field of 
+ *a BikePart in the given LinkedList. It iterates through the LinkedList and returns the BikePart whos's part name or number field 
  *is equal to the given string.
  *
  * @param bPLinkedList This parameter is the LinkedList that is being searched through.
- * @param bPNumber This parameter is the part number of the BikePart that is being looked for.
+ * @param bPNameOrNumber This parameter is the part number or name of the BikePart that is being looked for.
  * @return Returns BikePart named "part".
  */
-	public static BikePart searchBikePartList(LinkedList<BikePart> bPLinkedList, String bPNumber)
+	public static BikePart searchBikePartList(LinkedList<BikePart> bPLinkedList, String bPNameOrNumber)
 	{
 		BikePart part = null;
  		
 		for (BikePart currentPart : bPLinkedList) 
 		
 		{
-			if (currentPart.getNumber().equals(bPNumber)) 
+			if (currentPart.getName().equals(bPNameOrNumber)) 
 			{
 				 part = currentPart;
-				
+			}
+			else if (currentPart.getNumber().equals(bPNameOrNumber)) 
+			{
+				 part = currentPart;
 			}
 
 		}

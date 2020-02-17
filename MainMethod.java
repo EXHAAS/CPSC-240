@@ -1,22 +1,22 @@
-//THE MAIN METHOD FOR PROJECT 1
+/*THE MAIN METHOD FOR PROJECT 1
+*
+*I hereby declare upon my word of honor that I have neither given nor recieved
+*unauthorized help on this work
+*
+*@author Ellie Haas
+*@author Hayden Webb
+*@author Anthony Tompkins
+*/
 import java.util.Scanner;
 import java.util.LinkedList;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.List;
+
 
 public class MainMethod{
    
 	public static void main(String[] args)throws IOException{
 	  String warehouseFileName = "warehouseDB.txt";
-	 LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName,0);
+	 LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName, 0);
 	   
 	  Scanner reader = new Scanner(System.in);
       boolean loop = true;
@@ -38,44 +38,42 @@ public class MainMethod{
          
          String choice = reader.next();
          
-//RUNNING AN INFINITE LOOP RIGHT NOW. OOF. LEARN TO FIX. CREATE ANOTHER METHOD
-//TO BE CALLED AFTER CHOICE METHOD TO 
          switch(choice.toUpperCase()){
             case "READ":
-               System.out.println("You want to read a file!");
+               //System.out.println("You want to read a file!");
                bikeLL = ReadInventory.readInventory(bikeLL, reader);              
                break;
 
             case "ENTER":
                EnterSellDisplay.enterPart(reader, bikeLL);
-               System.out.println("You want to enter a part!");
+               //System.out.println("You want to enter a part!");
                 break;                          
             
             case "SELL":
                EnterSellDisplay.sellPart(reader, bikeLL);
-               System.out.println("You want to sell a part!");
+               //System.out.println("You want to sell a part!");
                break;
  
             case "DISPLAY":
             	EnterSellDisplay.displayPart(reader, bikeLL);
-               System.out.println("You want to display a part!");
+               //System.out.println("You want to display a part!");
                break;
  
             case "SORTNAME":
                //CALL THE SORTNAME METHOD
-               System.out.println("You want to sort by name!");
+               //System.out.println("You want to sort by name!");
                SortName.sortName(bikeLL);
                break;
 
             case "SORTNUMBER":
                //CALL THE SORTNUMBER METHOD
-               System.out.println("You want to sort by number!");
+               //System.out.println("You want to sort by number!");
                SortNumber.sortNumber(bikeLL);
                break;
  
             case "QUIT":
                //CALL THE QUIT METHOD
-               System.out.println("You want to quit!");
+               System.out.println("Thank you!");
                loop = false;
                break;               
 

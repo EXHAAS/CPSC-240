@@ -73,26 +73,30 @@ public class EnterSellDisplay{
            	return;
              }
          double sPrice = Double.parseDouble(sPriceString);
-         System.out.println("Is the part on sale? y/n");
          
-         String ans = s.next();
-        
-         boolean sale;
+         boolean sale = false;
+         boolean loop = true;
+         
+         while(loop == true){
+            System.out.println("Is the part on sale? y/n");
+            String ans = s.next();
             if(ans.equalsIgnoreCase("y")){
                sale = true;
+               loop = false;
             }else if(ans.equalsIgnoreCase("n")){
                sale = false;
+               loop = false;
             }else{
-               System.out.println("You entered an invalid response. It is assumed " +
-               "that the part is not on sale.");
-               sale = false;
-            }            
+               System.out.println("You entered an invalid response, please try " + 
+               "again");
+            } 
+         }           
          
          BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
          l.add(part);
          System.out.println("The part has been sucessfully added!");
       }  
-      }
+   }
       
       
  

@@ -10,14 +10,6 @@ import java.util.LinkedList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 public class EnterSellDisplay{
-//   public static void main(String[] args){        
-//      enterPart(reader, tester);   
-//      sellPart(reader, tester);
-//      displayPart(reader, tester);     
-//      for(BikePart part : tester){
-//        part.printInfo();
-//       }
-//   }
    
 /*
 *Designed for the user to manually enter a part. Asks the user for the name and 
@@ -29,8 +21,6 @@ public class EnterSellDisplay{
 *@param s The Scanner passed in from the main method
 *@param l The inventory LinkedList that's searched/added to
 */
-	
-	
 
 	public static void enterPart(Scanner s, LinkedList<BikePart> l){
 	  System.out.println("Enter the part's name:");
@@ -41,11 +31,15 @@ public class EnterSellDisplay{
       int flag = 1;
       String qInput = inputCheck(quantityString, flag);
       if(qInput == null) {
-      System.out.println("Invalid Input \n\n");
-    	return;
+         System.out.println("Invalid Input \n\n");
+    	   return;
       }
+      
       int quantity = Integer.parseInt(quantityString);
       BikePart temp = SearchBikePartList.searchBikePartList(l, name);
+      
+//CHECK IF THE PART WAS IN THE SYSTEM ALREADY. IF SO, INCREMENT THE QUANTITY. IF
+//NOT, CONTINUE TO PROMPT FOR INFORMATION 
       if(temp != null){
          System.out.println("The part was already in the system.");
          int var1 = temp.getQuantity();
@@ -59,9 +53,9 @@ public class EnterSellDisplay{
          String lPriceString = s.next();
          String lPInput = inputCheck(lPriceString, flag);
          if(lPInput == null) {
-             System.out.println("Invalid Input \n\n");
+            System.out.println("Invalid Input \n\n");
            	return;
-             }
+         }
          double lPrice = Double.parseDouble(lPriceString);
          System.out.println("Enter the part's sales price:");
          
@@ -69,9 +63,9 @@ public class EnterSellDisplay{
          String sPriceString = s.next();
          String sPInput = inputCheck(lPriceString, flag);
          if(sPInput == null) {
-             System.out.println("Invalid Input \n\n");
+            System.out.println("Invalid Input \n\n");
            	return;
-             }
+         }
          double sPrice = Double.parseDouble(sPriceString);
          
          boolean sale = false;

@@ -20,9 +20,6 @@ public class MainMethod{
 	   
 	  Scanner reader = new Scanner(System.in);
       boolean loop = true;
-//CALL SOME METHOD TO GET THE LINKEDLIST FROM THE INVENTORY FILE SO IT CAN SEND IT
-//TO ALL THE SEPERATE METHODS
-      //LinkedList inventory = //WHATEVER METHOD I CALL TO GET THE LIST
       
       while(loop == true){
 //PRINT THE USERS CHOICES, THEN LET THEM ENTER THEIR CHOICE
@@ -38,41 +35,33 @@ public class MainMethod{
          
          String choice = reader.next();
          
+//CALL WHICHEVER METHOD THE READER CHOSE. LOOP UNTIL QUIT IS CHOSEN        
          switch(choice.toUpperCase()){
             case "READ":
-               //System.out.println("You want to read a file!");
                bikeLL = ReadInventory.readInventory(bikeLL, reader);              
                break;
 
             case "ENTER":
                EnterSellDisplay.enterPart(reader, bikeLL);
-               //System.out.println("You want to enter a part!");
                 break;                          
             
             case "SELL":
                EnterSellDisplay.sellPart(reader, bikeLL);
-               //System.out.println("You want to sell a part!");
                break;
  
             case "DISPLAY":
             	EnterSellDisplay.displayPart(reader, bikeLL);
-               //System.out.println("You want to display a part!");
                break;
  
             case "SORTNAME":
-               //CALL THE SORTNAME METHOD
-               //System.out.println("You want to sort by name!");
                SortName.sortName(bikeLL);
                break;
 
             case "SORTNUMBER":
-               //CALL THE SORTNUMBER METHOD
-               //System.out.println("You want to sort by number!");
                SortNumber.sortNumber(bikeLL);
                break;
  
             case "QUIT":
-               //CALL THE QUIT METHOD
                System.out.println("Thank you!");
                loop = false;
                break;               
@@ -85,8 +74,6 @@ public class MainMethod{
          }         
       //USE THE WRITER CLASS TO WRITE THE LINKEDLIST TO A FILE     
       Writer.Write(warehouseFileName, bikeLL);
-      reader.close();   
-
-      
+      reader.close();        
    }
 }

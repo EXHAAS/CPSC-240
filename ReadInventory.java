@@ -25,6 +25,7 @@ public class ReadInventory
  */	
 	public static LinkedList<BikePart> readInventory(LinkedList<BikePart> bikeLL, Scanner scnr) throws IOException
 	{
+// A LinkedList that holds BikeParts is made from an inputted inventory file.		
 		LinkedList<BikePart> inventoryLL;
 		System.out.println("Input file path");
 		String inventoryFileName = scnr.next();
@@ -38,9 +39,13 @@ public class ReadInventory
 		System.out.println("Failed to read file \nInvalid formatting\n\n");		
 		return bikeLL;
 		}
+// notPresent keeps track of whether or not an inventory BikePart is present in the warehouse LinkedList of BikeParts.		
 		Boolean notPresent = true;
 		for(BikePart iBP: inventoryLL) 
 		{
+// Loop where each BikePart in inventoryLL is checked to see if it's number value is equal to the number value of any BikePart in
+// bikeLL, and if so the bikeLL listPrice, salesPrice, and onSale value are update to that of the inventoryLL BikePart.
+// The quanity value of the inventoryLL BikePart is added to the bikeLL's quantity value.			
 			for(BikePart wBP: bikeLL)
 			{
 				notPresent = true;
@@ -53,6 +58,7 @@ public class ReadInventory
 					notPresent = false;
 					break;
 				}
+// If the inventoryLL BikePart number value is not found in bikeLL, the inventoryLL BikePart is added to bikeLL.						
 			}
 			if(notPresent) 
 			{

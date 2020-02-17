@@ -1,0 +1,7 @@
+WTB_saddle,1234567890,33.00,25.58,false,5
+26inTube,1234567891,7.00,5.58,true,20
+seatPost,1234567892,17.00,15.21,true,300
+carbonHandleBars42cm,1234567893,47.00,5.58,false,8
+frontTire,1738495820,23.00,20.00,false,50
+leftPedal,1738597039,14.80,23.00,true,34
+bikeRack,2729475067,50.00,45.00,true,67, 

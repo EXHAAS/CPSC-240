@@ -1,0 +1,12 @@
+Hayden Webb did the File Reader class, File Writer class, Testing, and write up
+Anthony Tompkins did the SortNumber, ReadInventory, SearchBikePartList, and SortName classes
+Ellie Haas did the EnterSellDisplay, BikePart, and Main class, while doing documentation
+
+We all looked over and tweaked/made edits to eachothers' code from time to time
+
+
+
+The files were tested by doing various stress tests, such as unusual unicode character strings,
+negative numbers, long inputs, invalid inputs, and duplicated bikeParts.
+
+The GitHub we used is at this address: https://github.com/EXHAAS/CPSC-240

@@ -14,7 +14,19 @@ public class Importer
     
     //LinkedList<String>
     public static LinkedList<BikePart> Import(String directory, int state) throws IOException
-    //We discussed using LinkedList, but can be changed to ArrayList if better
+    
+    /**
+ * This method will import the file, take each line of data, and convert 
+ * each part separated by comma into a bikePart object, then combined
+ * into a bikePart linked list
+ * 
+ *
+ * @param  directory - The string of the file name to import a file from
+ * @param state - an int to check if the file is valid or not, 1 or 0
+ * @param return - A linked list of bikeParts
+ *
+ */
+//We discussed using LinkedList, but can be changed to ArrayList if better
     {
       
       Boolean noException = true;
@@ -113,6 +125,14 @@ public class Importer
       //items = list;
     }
     public static int writeEmptyFile (String directory) throws IOException
+       /**
+ * This method will create a blank file
+ * 
+ *
+ * @param  directory - The string of the file name to write a file to
+ * @param return - An int of 1
+ * 
+ */
    {
      FileOutputStream fileOut= new FileOutputStream(directory);
      

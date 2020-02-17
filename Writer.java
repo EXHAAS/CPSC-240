@@ -18,9 +18,17 @@ public class Writer
     // instance variables - replace the example below with your own
     private int x;
 
-    /**
-     * Constructor for objects of class Writer
-     */
+       /**
+ * This method will write to a file, take each field of a bikePart, and print 
+ * each field of each part separated by comma to the file
+ * 
+ *
+ * @param  outputDirectory - The string of the file name to write a file to
+ * @param items - The bikePart LinkedList which will be used to print out
+ * information to the file
+ * @param return - no return
+ *
+ */
     public static void Write(String outputDirectory, LinkedList<BikePart> items) throws IOException
     //We discussed using LinkedList, but can be changed to ArrayList if better
     {

@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
 *
 *CPSC-240
-*I hereby declare upon my word of honor that I have neither given nor recieved
+*I hereby declare upon my word of honor that I have neither given nor received
 *unauthorized help on this work.
 *
 *  @author  Anthony Tompkins
@@ -20,18 +20,25 @@ public class ReadInventory
  * @param scnr reads user input for file path.
  * @return returns the updated LinkedList.
  * @throws IOException
+ * 
+ * 
  */	
 	public static LinkedList<BikePart> readInventory(LinkedList<BikePart> bikeLL, Scanner scnr) throws IOException
 	{
+		LinkedList<BikePart> inventoryLL;
 		System.out.println("Input file path");
 		String inventoryFileName = scnr.next();
-// A LinkedList that holds BikeParts is made from an inputted inventory file.
-		LinkedList<BikePart> inventoryLL = Importer.Import(inventoryFileName,1);
-// notPresent keeps track of whether or not an inventory BikePart is present in the warehouse LinkedList of BikeParts.
+// try/catch block checks if NumberFormatException is thrown if inventory file is improperly formatted.
+		try 
+		{
+		inventoryLL = Importer.Import(inventoryFileName,1);
+		}
+		catch(java.lang.NumberFormatException e) 
+		{
+		System.out.println("Failed to read file \nInvalid formatting\n\n");		
+		return bikeLL;
+		}
 		Boolean notPresent = true;
-// Loop where each BikePart in inventoryLL is checked to see if it's number value is equal to the number value of any BikePart in
-// bikeLL, and if so the bikeLL listPrice, salesPrice, and onSale value are update to that of the inventoryLL BikePart.
-// The quanity value of the inventoryLL BikePart is added to the bikeLL's quantity value.
 		for(BikePart iBP: inventoryLL) 
 		{
 			for(BikePart wBP: bikeLL)
@@ -46,7 +53,6 @@ public class ReadInventory
 					notPresent = false;
 					break;
 				}
-// If the inventoryLL BikePart number value is not found in bikeLL, the inventoryLL BikePart is added to bikeLL.
 			}
 			if(notPresent) 
 			{
@@ -54,7 +60,8 @@ public class ReadInventory
 				
 			}
 		}
-				
+		
+		
 		return bikeLL;
 	}
 	

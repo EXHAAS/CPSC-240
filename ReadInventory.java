@@ -25,13 +25,17 @@ public class ReadInventory
  */	
 	public static LinkedList<BikePart> readInventory(LinkedList<BikePart> bikeLL, Scanner scnr) throws IOException
 	{
-// A LinkedList that holds BikeParts is made from an inputted inventory file.		
+// A LinkedList that holds BikeParts is made from an inputed inventory file.	
+
+	
 		LinkedList<BikePart> inventoryLL;
 		System.out.println("Input file path");
 		String inventoryFileName = scnr.next();
-// try/catch block checks if NumberFormatException is thrown if inventory file is improperly formatted.
+		
+		// try/catch block checks if NumberFormatException is thrown if inventory file is improperly formatted.
 		try 
-		{
+		{		
+		
 		inventoryLL = Importer.Import(inventoryFileName,1);
 		}
 		catch(java.lang.NumberFormatException e) 
@@ -65,6 +69,7 @@ public class ReadInventory
 				bikeLL.add(iBP);
 				
 			}
+			Writer.Write("warehouseDB.txt", bikeLL);
 		}
 		
 		
@@ -77,8 +82,4 @@ public class ReadInventory
 	
 	
 
-	
-	
-	
-	
 	

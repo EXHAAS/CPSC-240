@@ -20,7 +20,6 @@ public class EnterSellDisplay{
 *rest of the information then adds it to the end of the LinkedList.
 *
 *@param s The Scanner passed in from the main method
-*@param l The inventory LinkedList that's searched/added to
 */
 
 	public static void enterPart(Scanner s) throws IOException{
@@ -108,7 +107,6 @@ public class EnterSellDisplay{
 *date of the sale.
 *
 *@param s The Scanner passed in from the main method
-*@param l The inventory LinkedList being searched through
 */ 
    public static void sellPart(Scanner s) throws IOException{
       System.out.println("Enter the name of the warehouse:");
@@ -152,7 +150,6 @@ public class EnterSellDisplay{
 *system prints that it isn't there.
 *
 *@param s The Scanner passed in from the main method 
-*@param l The inventory LinkedList being searched through
 */
    public static void displayPart(Scanner s) throws IOException{
       System.out.println("Enter the name of the warehouse:");

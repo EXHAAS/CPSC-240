@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.io.IOException;
 public class EnterSellDisplay{
    
 /*
@@ -22,8 +23,13 @@ public class EnterSellDisplay{
 *@param l The inventory LinkedList that's searched/added to
 */
 
-	public static void enterPart(Scanner s, LinkedList<BikePart> l){
-	  System.out.println("Enter the part's name:");
+	public static void enterPart(Scanner s) throws IOException{
+      System.out.println("Enter the name of the warehouse:");
+      String whName = s.next();
+      
+      LinkedList<BikePart> houseList = Importer.Import(whName, 1);
+      
+	   System.out.println("Enter the part's name:");
       String name = s.next();
       System.out.println("How many are there?");
       
@@ -36,12 +42,12 @@ public class EnterSellDisplay{
       }
       
       int quantity = Integer.parseInt(quantityString);
-      BikePart temp = SearchBikePartList.searchBikePartList(l, name);
+      BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
       
 //CHECK IF THE PART WAS IN THE SYSTEM ALREADY. IF SO, INCREMENT THE QUANTITY. IF
 //NOT, CONTINUE TO PROMPT FOR INFORMATION 
       if(temp != null){
-         System.out.println("The part was already in the system.");
+         System.out.println("The part was already in the system.\n\n");
          int var1 = temp.getQuantity();
          temp.setQuantity(var1 + quantity);
       }else{            
@@ -87,8 +93,8 @@ public class EnterSellDisplay{
          }           
          
          BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
-         l.add(part);
-         System.out.println("The part has been sucessfully added!");
+         houseList.add(part);
+         System.out.println("The part has been sucessfully added!\n\n");
       }  
    }
       
@@ -103,23 +109,28 @@ public class EnterSellDisplay{
 *@param s The Scanner passed in from the main method
 *@param l The inventory LinkedList being searched through
 */ 
-   public static void sellPart(Scanner s, LinkedList<BikePart> l){
+   public static void sellPart(Scanner s) throws IOException{
+      System.out.println("Enter the name of the warehouse:");
+      String whName = s.next();
+      
+      LinkedList<BikePart> houseList = Importer.Import(whName, 1);
+       
       System.out.println("Enter the part's number: ");
       String number = s.next();
       
-      BikePart temp = SearchBikePartList.searchBikePartList(l, number);
+      BikePart temp = SearchBikePartList.searchBikePartList(houseList, number);
       if(temp != null){
          System.out.println(temp.getName());
          temp.setQuantity(temp.getQuantity() - 1);
          if(temp.getOnSale() == true){
             System.out.println(temp.getSalesPrice());
-            System.out.println("This part is on sale.");
+            System.out.println("This part is on sale.\n\n");
          }else{
             System.out.println(temp.getListPrice());
-            System.out.println("This part is not on sale.");
+            System.out.println("This part is not on sale.\n\n");
          }
       }else{
-         System.out.println("This part was not in the system.");
+         System.out.println("This part was not in the system.\n\n");
       }
       
       Date time = new Date();
@@ -136,20 +147,26 @@ public class EnterSellDisplay{
 *@param s The Scanner passed in from the main method 
 *@param l The inventory LinkedList being searched through
 */
-   public static void displayPart(Scanner s, LinkedList<BikePart> l){
+   public static void displayPart(Scanner s) throws IOException{
+      System.out.println("Enter the name of the warehouse:");
+      String whName = s.next();
+      
+      LinkedList<BikePart> houseList = Importer.Import(whName, 1);
+      
       System.out.println("Enter the name of the part:");
       String name = s.next();
       
-      BikePart temp = SearchBikePartList.searchBikePartList(l, name);
+      BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
+      
       if(temp != null){
          System.out.println("The name is: " + temp.getName());
          if(temp.getOnSale() == true){
-            System.out.println("The price is: " + temp.getSalesPrice());
+            System.out.println("The price is: " + temp.getSalesPrice() + "\n\n");
          }else{
-            System.out.println("The price is: " + temp.getListPrice());
+            System.out.println("The price is: " + temp.getListPrice() + "\n\n");
          }
       }else{
-         System.out.println("The part is not in the system.");
+         System.out.println("The part is not in the system.\n\n");
       }
    }   
    

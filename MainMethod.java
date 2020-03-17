@@ -69,6 +69,7 @@ public class MainMethod{
                System.out.println("Enter the name of the new van:");
                String nm = reader.next();
                Writer.Write(nm, blank);
+               Fleet.FleetAdd(nm);
                System.out.println("Your van has been created\n\n");
                break;
                
@@ -100,7 +101,7 @@ public class MainMethod{
             }
          }         
       //USE THE WRITER CLASS TO WRITE THE LINKEDLIST TO A FILE     
-      Writer.Write(warehouseFileName, bikeLL);
-      reader.close();        
+      //Writer.Write(warehouseFileName, bikeLL);
+      //reader.close();        
    }
 }

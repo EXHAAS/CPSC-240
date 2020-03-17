@@ -95,9 +95,8 @@ public class EnterSellDisplay{
             BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
             houseList.add(part);
             System.out.println("The part has been sucessfully added!\n\n");
-            
-            Writer.Write(whName, houseList);
          } 
+      Writer.Write(whName, houseList);
    }
       
       

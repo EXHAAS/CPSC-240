@@ -167,14 +167,16 @@ public class Van
                   System.out.println("You have selected more parts then there are.");
                   System.out.println("Please try again\n\n");
                }else if(num == temp.getQuantity()){
+                  BikePart temp2 = temp;
                   System.out.println("You have chosen to move all the parts");
-                  toMove.add(temp);
+                  toMove.add(temp2);
                   temp.setQuantity(0);
                   cont2 = false;
                }else{
+                  BikePart temp2 = temp;
                   int dif = temp.getQuantity() - num;
-                  temp.setQuantity(num);
-                  toMove.add(temp);
+                  temp2.setQuantity(num);
+                  toMove.add(temp2);
                   temp.setQuantity(dif);
                   cont2 = false;
                }

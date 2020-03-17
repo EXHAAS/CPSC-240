@@ -20,13 +20,14 @@ public class EnterSellDisplay{
 *rest of the information then adds it to the end of the LinkedList.
 *
 *@param s The Scanner passed in from the main method
+*@param l The inventory LinkedList that's searched/added to
 */
 
-	public static void enterPart(Scanner s) throws IOException{
+	public static LinkedList<BikePart> enterPart(Scanner s, LinkedList<BikePart> totalInvLL) throws IOException{
       System.out.println("Enter the name of the warehouse:");
       String whName = s.next();
       
-      LinkedList<BikePart> houseList = Importer.Import(whName, 1);
+      LinkedList<BikePart> houseList = Importer.Import(whName, 0);
       
    	   System.out.println("Enter the part's name:");
          String name = s.next();
@@ -37,7 +38,7 @@ public class EnterSellDisplay{
          String qInput = inputCheck(quantityString, flag);
          if(qInput == null) {
             System.out.println("Invalid Input \n\n");
-       	   return;
+       	   return totalInvLL;
          }
          
          int quantity = Integer.parseInt(quantityString);
@@ -49,6 +50,8 @@ public class EnterSellDisplay{
             System.out.println("The part was already in the system.\n\n");
             int var1 = temp.getQuantity();
             temp.setQuantity(var1 + quantity);
+            Writer.Write(whName, houseList);
+            return SearchBikePartList.searchBikePartList(totalInvLL, temp.getName(), whName, quantity, 0); 
          }else{            
             System.out.println("Enter the part's number:");
             String number = s.next();
@@ -59,7 +62,7 @@ public class EnterSellDisplay{
             String lPInput = inputCheck(lPriceString, flag);
             if(lPInput == null) {
                System.out.println("Invalid Input \n\n");
-              	return;
+              	return totalInvLL;
             }
             double lPrice = Double.parseDouble(lPriceString);
             System.out.println("Enter the part's sales price:");
@@ -69,7 +72,7 @@ public class EnterSellDisplay{
             String sPInput = inputCheck(lPriceString, flag);
             if(sPInput == null) {
                System.out.println("Invalid Input \n\n");
-              	return;
+              	return totalInvLL;
             }
             double sPrice = Double.parseDouble(sPriceString);
             
@@ -94,8 +97,12 @@ public class EnterSellDisplay{
             BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
             houseList.add(part);
             System.out.println("The part has been sucessfully added!\n\n");
-         } 
-      Writer.Write(whName, houseList);
+            
+            Writer.Write(whName, houseList);
+         return SearchBikePartList.searchBikePartList(totalInvLL, part.getName(), whName, 0, 0);   
+         }
+         
+         
    }
       
       
@@ -107,8 +114,9 @@ public class EnterSellDisplay{
 *date of the sale.
 *
 *@param s The Scanner passed in from the main method
+*@param l The inventory LinkedList being searched through
 */ 
-   public static void sellPart(Scanner s) throws IOException{
+   public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL) throws IOException{
       System.out.println("Enter the name of the warehouse:");
       String whName = s.next();
       
@@ -138,9 +146,15 @@ public class EnterSellDisplay{
          System.out.println(form.format(time));  
          
          Writer.Write(whName, houseList);
+     return SearchBikePartList.searchBikePartList(totalInvLL, temp.getName(), whName, 0, 1);
       }else{
          System.out.println("There was nothing there!\n\n");
-      }  
+      }
+ //     return ReadInventory.readInventory(whName, totalInvLL);  
+	return totalInvLL;
+      
+	
+      
    }
    
 /* 
@@ -150,6 +164,7 @@ public class EnterSellDisplay{
 *system prints that it isn't there.
 *
 *@param s The Scanner passed in from the main method 
+*@param l The inventory LinkedList being searched through
 */
    public static void displayPart(Scanner s) throws IOException{
       System.out.println("Enter the name of the warehouse:");
@@ -234,4 +249,3 @@ public class EnterSellDisplay{
 		return input;
 	}
 }
-

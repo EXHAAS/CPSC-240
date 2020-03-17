@@ -18,7 +18,14 @@ public class Fleet
     
     
     public static void FleetAdd(String Van) throws IOException
-    
+       /**
+ * This method will import the fleet file, add the Van to the fleet, and
+ * update the fleet file
+ * @author Hayden Webb
+ *
+ * @param  Van - The Van to be inserted into the fleet
+ *
+ */
     {
      String Fleet = "Fleet";
         
@@ -81,66 +88,7 @@ public class Fleet
      //return TotNum; 
     }
     
-    public static int NotWorkingFleetWrite(String directory, String updatedFleet, String Fleet) throws IOException {
-    // Scanner inputb = new Scanner(System.in);
-      //String Baq = input.next();
-      //System.out.println("Please enter the name of the text file:");
-      FileInputStream fileIn2= new FileInputStream(directory);
-      Scanner scnr2= new Scanner(fileIn2);
-      PrintWriter out = new PrintWriter(directory);
-      
-      int aqq = 0;
-      //String qaaa = scnr.nextLine();
-      boolean endOrNot = true;
-      //String vmm = scnr.nextLine();
-      String qaaa;
-      String fleetName = Fleet;
-      String[] FleetList;
-      //String[] FleetList;
-      System.out.println ("Alk");
-      try {
-      while (aqq == 0){
-          
-          qaaa = scnr2.nextLine();
-          
-          //double qaaa2 = Double.parseDouble(qaaa);
-          if (fleetName.equals (qaaa)) {
-             
-              
-            }else {
-            out.println(qaaa);    
-                
-            }
-            
-          System.out.println ("A");
-          
-          //aqq = aqq + 1;
-        }
-    }
-    catch (java.util.NoSuchElementException exception){
-        System.out.println ("NoElemebt");
-        aqq = 1;
-        out.println(updatedFleet);
-    }
-      
-       out.flush();
-    
-       fileIn2.close(); 
-       return 7;
-    }
-/*Prints out the list of all the van files in the fleet
-*
-*@author Eleanor Haas
-*/
-   public static void printFleet() throws IOException{
-      File inFile = new File("fleet.txt");   
-      Scanner scan = new Scanner(inFile);
-      
-      while(scan.hasNext()){
-         String line = scan.next();
-         System.out.println(line);
-      }
-   }
+ 
        
     
     

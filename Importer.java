@@ -99,26 +99,26 @@ public class Importer
     catch (java.io.FileNotFoundException exception){
     
     if(state == 0) {
-    System.out.println("warehouseDB.txt created \n\n");  
+    //System.out.println("warehouseDB.txt created \n\n");  
     flag = writeEmptyFile (directory); //Will Create a blank new file
                                          //if file does not exist
       //System.out.println(items); //--InternalTesting--
       //System.out.println("CaughtNoFile"); //--InternalTesting--
     }      //catch block to check for file existing  
     else {
-    	 System.out.println("File Not Found \n\n");
+    	 //System.out.println("File Not Found \n\n");
     }
     noException = false;
     }
       
     if(state == 1) {
     	if(noException) {
-    		System.out.println("The warehouse list has been updated \n\n");
+    		//System.out.println("The warehouse list has been updated \n\n");
     	}
     }
     else {
     	if(noException) {
-    		System.out.println("warehouseDB.txt was found \n\n");
+    		//System.out.println("warehouseDB.txt was found \n\n");
     	}
     }
     return items;  

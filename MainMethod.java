@@ -35,8 +35,6 @@ public class MainMethod{
          
          String choice = reader.next();
          
-         LinkedList<BikePart> blank = new LinkedList<BikePart>();
-         
 //CALL WHICHEVER METHOD THE READER CHOSE. LOOP UNTIL QUIT IS CHOSEN        
          switch(choice.toUpperCase()){
             case "READ":
@@ -44,15 +42,15 @@ public class MainMethod{
                break;
 
             case "ENTER":
-               EnterSellDisplay.enterPart(reader, blank);
+               EnterSellDisplay.enterPart(reader);
                 break;                          
             
             case "SELL":
-               EnterSellDisplay.sellPart(reader, blank);
+               EnterSellDisplay.sellPart(reader);
                break;
  
             case "DISPLAY":
-               EnterSellDisplay.displayPart(reader, blank);
+               EnterSellDisplay.displayPart(reader);
                break;
  	    
 	    case "SORTNAME":

@@ -52,15 +52,15 @@ public class MainMethod{
                break;
  
             case "DISPLAY":
-            	EnterSellDisplay.displayPart(reader, blank);
+               EnterSellDisplay.displayPart(reader, blank);
                break;
- 
-            case "SORTNAME":
-               SortName.sortName(bikeLL);
+ 	    
+	    case "SORTNAME":
+               SortNameNumber.sortNameNumber(choice, reader);
                break;
 
             case "SORTNUMBER":
-               SortNumber.sortNumber(bikeLL);
+               SortNameNumber.sortNameNumber(choice, reader);
                break;
  
             case "QUIT":

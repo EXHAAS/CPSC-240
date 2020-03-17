@@ -18,7 +18,13 @@ public class Van
     
     
     public static int Transfer(String vanDirectory, String warDirectory, BikePart bikePart) throws IOException
-    
+       /**
+ * This method will add a bike part to a van or a warehouse, and remove it from another van or warehouse
+ * @author Hayden Webb
+ *
+ * @param  vanDirectory - The .txt file to receive the part
+ * @param  warDirectory - The .txt file which has the part removed from it
+ */
     {
       
       
@@ -75,57 +81,6 @@ public class Van
       //returns updated linked list with part removed
     }
     
-    public static LinkedList<BikePart> ToWarehouse(LinkedList<BikePart> bikePartsMain, BikePart bikePart, String directory) throws IOException
-    
-    {
-      
-      
-      bikePartsMain.remove(bikePart); //Removes transferred part from warehouse
-      
-      LinkedList<BikePart> partToMove = new LinkedList<BikePart>();
-      
-      Importer read = new Importer();
-      partToMove = read.Import("directory1",0); 
-      partToMove.addLast(bikePart);
-      
-      // Overwrites whatever is in the van file, so this copies all data beforehand
-                                                           
-      Writer write = new Writer();
-      write.Write(directory, partToMove);
-      
-      
-      
-      return bikePartsMain;  
-      //returns updated linked list with part removed
-    }
-    
-    public static LinkedList<BikePart> ToVanOLD(LinkedList<BikePart> bikePartsMain, BikePart bikePart, String directory) throws IOException
-    
-    {
-      
-      
-      
-      
-      bikePartsMain.remove(bikePart); //Removes transferred part from warehouse
-      
-      
-      
-      LinkedList<BikePart> partToMove = new LinkedList<BikePart>();
-      
-      Importer read = new Importer();
-      partToMove = read.Import(directory,0); 
-      partToMove.addLast(bikePart);
-      
-      // Overwrites whatever is in the van file, so this copies all data beforehand
-                                                           
-      Writer write = new Writer();
-      write.Write(directory, partToMove);
-      
-      
-      
-      return bikePartsMain;  
-      //returns updated linked list with part removed
-    }
     
 /*Allows the user to select a warehouse/van file that will have inventory
 *moved FROM it. Loops through the list until the user has selected all the

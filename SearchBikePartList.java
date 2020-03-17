@@ -26,7 +26,7 @@ public class SearchBikePartList
 		for (BikePart currentPart : bPLinkedList) 
 		
 		{
-			if (currentPart.getName().equals(bPNameOrNumber)) 
+			if (currentPart.getName().equalsIgnoreCase(bPNameOrNumber)) 
 			{
 				 part = currentPart;
 			}

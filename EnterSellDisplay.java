@@ -95,6 +95,8 @@ public class EnterSellDisplay{
          BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
          houseList.add(part);
          System.out.println("The part has been sucessfully added!\n\n");
+         
+         Writer.Write(whName, houseList);
       }  
    }
       
@@ -135,7 +137,9 @@ public class EnterSellDisplay{
       
       Date time = new Date();
       SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-      System.out.println(form.format(time));    
+      System.out.println(form.format(time));  
+      
+      Writer.Write(whName, houseList);  
    }
    
 /* 
@@ -168,6 +172,8 @@ public class EnterSellDisplay{
       }else{
          System.out.println("The part is not in the system.\n\n");
       }
+      
+      Writer.Write(whName, houseList);
    }   
    
 /**

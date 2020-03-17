@@ -33,7 +33,7 @@ public class SortNameNumber
 		
 			if(fileChoice.equals("MAIN")) 
 			{
-				String warehouseFileName = "mainwarehouse.txt";
+				String warehouseFileName = "warehouseDB.txt";
 				bikeLL = Importer.Import(warehouseFileName, 0);
 			}
 			else if(fileChoice.equals("VAN")) 
@@ -44,7 +44,7 @@ public class SortNameNumber
 			}
 			else if(fileChoice.equals("TOTAL")) 
 			{
-				String totalInventoryFileName = "warehouseDB.txt";
+				String totalInventoryFileName = "totalinventory.txt";
 				bikeLL = Importer.Import(totalInventoryFileName, 0);
 			}
 			else if(fileChoice.equals("QUIT")) 

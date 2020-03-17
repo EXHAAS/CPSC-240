@@ -68,6 +68,8 @@ public class MainMethod{
                System.out.println("Enter the name of the new van:");
                String nm = reader.next();
                Writer.Write(nm, blank);
+               System.out.println("Your van has been created\n\n");
+               break;
  
             case "QUIT":
                System.out.println("Thank you!");

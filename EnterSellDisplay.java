@@ -29,77 +29,75 @@ public class EnterSellDisplay{
       
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
       
-      
-      
-	   System.out.println("Enter the part's name:");
-      String name = s.next();
-      System.out.println("How many are there?");
-      
-      String quantityString = s.next();
-      int flag = 1;
-      String qInput = inputCheck(quantityString, flag);
-      if(qInput == null) {
-         System.out.println("Invalid Input \n\n");
-    	   return;
-      }
-      
-      int quantity = Integer.parseInt(quantityString);
-      BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
-      
-//CHECK IF THE PART WAS IN THE SYSTEM ALREADY. IF SO, INCREMENT THE QUANTITY. IF
-//NOT, CONTINUE TO PROMPT FOR INFORMATION 
-      if(temp != null){
-         System.out.println("The part was already in the system.\n\n");
-         int var1 = temp.getQuantity();
-         temp.setQuantity(var1 + quantity);
-      }else{            
-         System.out.println("Enter the part's number:");
-         String number = s.next();
-         System.out.println("Enter the part's list price:");
+   	   System.out.println("Enter the part's name:");
+         String name = s.next();
+         System.out.println("How many are there?");
          
-         flag = 2;
-         String lPriceString = s.next();
-         String lPInput = inputCheck(lPriceString, flag);
-         if(lPInput == null) {
+         String quantityString = s.next();
+         int flag = 1;
+         String qInput = inputCheck(quantityString, flag);
+         if(qInput == null) {
             System.out.println("Invalid Input \n\n");
-           	return;
+       	   return;
          }
-         double lPrice = Double.parseDouble(lPriceString);
-         System.out.println("Enter the part's sales price:");
          
+         int quantity = Integer.parseInt(quantityString);
+         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
          
-         String sPriceString = s.next();
-         String sPInput = inputCheck(lPriceString, flag);
-         if(sPInput == null) {
-            System.out.println("Invalid Input \n\n");
-           	return;
-         }
-         double sPrice = Double.parseDouble(sPriceString);
-         
-         boolean sale = false;
-         boolean loop = true;
-         
-         while(loop == true){
-            System.out.println("Is the part on sale? y/n");
-            String ans = s.next();
-            if(ans.equalsIgnoreCase("y")){
-               sale = true;
-               loop = false;
-            }else if(ans.equalsIgnoreCase("n")){
-               sale = false;
-               loop = false;
-            }else{
-               System.out.println("You entered an invalid response, please try " + 
-               "again");
-            } 
-         }           
-         
-         BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
-         houseList.add(part);
-         System.out.println("The part has been sucessfully added!\n\n");
-         
-         Writer.Write(whName, houseList);
-      }  
+   //CHECK IF THE PART WAS IN THE SYSTEM ALREADY. IF SO, INCREMENT THE QUANTITY. IF
+   //NOT, CONTINUE TO PROMPT FOR INFORMATION 
+         if(temp != null){
+            System.out.println("The part was already in the system.\n\n");
+            int var1 = temp.getQuantity();
+            temp.setQuantity(var1 + quantity);
+         }else{            
+            System.out.println("Enter the part's number:");
+            String number = s.next();
+            System.out.println("Enter the part's list price:");
+            
+            flag = 2;
+            String lPriceString = s.next();
+            String lPInput = inputCheck(lPriceString, flag);
+            if(lPInput == null) {
+               System.out.println("Invalid Input \n\n");
+              	return;
+            }
+            double lPrice = Double.parseDouble(lPriceString);
+            System.out.println("Enter the part's sales price:");
+            
+            
+            String sPriceString = s.next();
+            String sPInput = inputCheck(lPriceString, flag);
+            if(sPInput == null) {
+               System.out.println("Invalid Input \n\n");
+              	return;
+            }
+            double sPrice = Double.parseDouble(sPriceString);
+            
+            boolean sale = false;
+            boolean loop = true;
+            
+            while(loop == true){
+               System.out.println("Is the part on sale? y/n");
+               String ans = s.next();
+               if(ans.equalsIgnoreCase("y")){
+                  sale = true;
+                  loop = false;
+               }else if(ans.equalsIgnoreCase("n")){
+                  sale = false;
+                  loop = false;
+               }else{
+                  System.out.println("You entered an invalid response, please try " + 
+                  "again");
+               } 
+            }           
+            
+            BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
+            houseList.add(part);
+            System.out.println("The part has been sucessfully added!\n\n");
+            
+            Writer.Write(whName, houseList);
+         } 
    }
       
       
@@ -144,7 +142,7 @@ public class EnterSellDisplay{
          
          Writer.Write(whName, houseList);
       }else{
-         System.out.println("There was nothing there!");
+         System.out.println("There was nothing there!\n\n");
       }  
    }
    
@@ -163,23 +161,27 @@ public class EnterSellDisplay{
       
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
       
-      System.out.println("Enter the name of the part:");
-      String name = s.next();
-      
-      BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
-      
-      if(temp != null){
-         System.out.println("The name is: " + temp.getName());
-         if(temp.getOnSale() == true){
-            System.out.println("The price is: " + temp.getSalesPrice() + "\n\n");
+      if(houseList.size() != 0){
+         System.out.println("Enter the name of the part:");
+         String name = s.next();
+         
+         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
+         
+         if(temp != null){
+            System.out.println("The name is: " + temp.getName());
+            if(temp.getOnSale() == true){
+               System.out.println("The price is: " + temp.getSalesPrice() + "\n\n");
+            }else{
+               System.out.println("The price is: " + temp.getListPrice() + "\n\n");
+            }
          }else{
-            System.out.println("The price is: " + temp.getListPrice() + "\n\n");
+            System.out.println("The part is not in the system.\n\n");
          }
+         
+         Writer.Write(whName, houseList);
       }else{
-         System.out.println("The part is not in the system.\n\n");
+         System.out.println("There was nothing there!\n\n");
       }
-      
-      Writer.Write(whName, houseList);
    }   
    
 /**

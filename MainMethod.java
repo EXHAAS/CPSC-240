@@ -73,13 +73,17 @@ public class MainMethod{
                break;
                
             case "MOVEINVENTORY":
+               Fleet.printFleet();
+               System.out.println("warehouseDB.txt");
                System.out.println("Which file would you like to move from?");
-               //PRINT OUT ALL FILES FROM FLEET + WAREHOUSE
                String moveFile = reader.next();
                LinkedList<BikePart> move = Van.chooseParts(moveFile, reader);
+
+               Fleet.printFleet();
+               System.out.println("warehouseDB.txt");
                System.out.println("Which file would you like to move to?");
-               //PRINT OUT ALL FILES AGAIN
                String toFile = reader.next();
+               
                Writer.Write(toFile, move);
                System.out.println("Your inventory has been moved\n\n");
                break;

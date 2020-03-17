@@ -128,7 +128,20 @@ public class Fleet
        fileIn2.close(); 
        return 7;
     }
-    
+/*Prints out the list of all the van files in the fleet
+*
+*@author Eleanor Haas
+*/
+   public static void printFleet() throws IOException{
+      File inFile = new File("fleet.txt");   
+      Scanner scan = new Scanner(inFile);
+      
+      while(scan.hasNext()){
+         String line = scan.next();
+         System.out.println(line);
+      }
+   }
+       
     
     
 }

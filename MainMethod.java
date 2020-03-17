@@ -35,6 +35,8 @@ public class MainMethod{
          
          String choice = reader.next();
          
+         LinkedList<BikePart> blank = new LinkedList<BikePart>();
+         
 //CALL WHICHEVER METHOD THE READER CHOSE. LOOP UNTIL QUIT IS CHOSEN        
          switch(choice.toUpperCase()){
             case "READ":
@@ -53,13 +55,18 @@ public class MainMethod{
                EnterSellDisplay.displayPart(reader);
                break;
  	    
-	    case "SORTNAME":
+	         case "SORTNAME":
                SortNameNumber.sortNameNumber(choice, reader);
                break;
 
             case "SORTNUMBER":
                SortNameNumber.sortNameNumber(choice, reader);
                break;
+               
+            case "CREATEVAN":
+               System.out.println("Enter the name of the new van:");
+               String nm = reader.next();
+               Writer.Write(nm, blank);
  
             case "QUIT":
                System.out.println("Thank you!");

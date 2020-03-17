@@ -23,11 +23,11 @@ public class ReadInventory
  * 
  * 
  */	
-	public static LinkedList<BikePart> readInventory(LinkedList<BikePart> bikeLL, Scanner scnr) throws IOException
+	public static LinkedList<BikePart> readInventory(LinkedList<BikePart> bikeLL, LinkedList<BikePart> tILL ,Scanner scnr) throws IOException
 	{
 // A LinkedList that holds BikeParts is made from an inputed inventory file.	
 
-	
+		
 		LinkedList<BikePart> inventoryLL;
 		System.out.println("Input file path");
 		String inventoryFileName = scnr.next();
@@ -70,14 +70,37 @@ public class ReadInventory
 				
 			}
 			Writer.Write("warehouseDB.txt", bikeLL);
+			
 		}
+		for(BikePart iBP: inventoryLL) 
+		{
+// Loop where each BikePart in tILL is checked to see if it's number value is equal to the number value of any BikePart in
+// bikeLL, and if so the bikeLL listPrice, salesPrice, and onSale value are update to that of the tILL BikePart.
+// The quanity value of the tILL BikePart is added to the bikeLL's quantity value.			
+			for(BikePart wBP: tILL)
+			{
+				notPresent = true;
+				if(wBP.getNumber().equals(iBP.getNumber()))
+				{
+					wBP.setListPrice(iBP.getListPrice());
+					wBP.setSalesPrice(iBP.getSalesPrice());
+					wBP.setOnSale(iBP.getOnSale());
+					wBP.setQuantity(wBP.getQuantity() + iBP.getQuantity());
+					notPresent = false;
+					break;
+				}
+// If the inventoryLL BikePart number value is not found in tILL, the inventoryLL BikePart is added to tILL.						
+			}
+			if(notPresent) 
+			{
+				tILL.add(iBP);
+				
+			}
 		
 		
-		return bikeLL;
 	}
-	
-	
-}
+		return tILL;
+}}
 	
 	
 	

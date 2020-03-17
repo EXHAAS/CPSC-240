@@ -1,10 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.ListIterator;
 /**
@@ -87,7 +90,19 @@ public class Fleet
        
      //return TotNum; 
     }
-    
+/**
+ * Prints out fleet.txt file.   
+ * @throws IOException
+ */
+    public static void printFleet() throws IOException {
+    	BufferedReader br = new BufferedReader(new FileReader("fleet.txt"));  
+    	String line = null;  
+    	while ((line = br.readLine()) != null)  
+    	{  
+    	  System.out.println(line); 
+    	} 
+    	br.close();
+    }
  
        
     

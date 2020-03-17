@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.LinkedList;
+
 /**
 * 
 * *CPSC-240
@@ -19,6 +21,7 @@ public class SearchBikePartList
  * @param bPNameOrNumber This parameter is the part number or name of the BikePart that is being looked for.
  * @return Returns BikePart named "part".
  */
+	//public static searchBikePartList(bPLinkedList:LinkedList<BikePart>,bPNameOrNumber:String ):BikePart
 	public static BikePart searchBikePartList(LinkedList<BikePart> bPLinkedList, String bPNameOrNumber)
 	{
 		BikePart part = null;
@@ -35,7 +38,64 @@ public class SearchBikePartList
 				 part = currentPart;
 			}
 
+					
+				
+			
 		}
 		return part;
   } 
-}
+/**
+ * A second implementation of the searchBikePartList method used for searching through
+ * and updating the total inventory file.
+ * @param bPLL a BikePart LinkedList derived from the totalinventory.txt file.
+ * @param naNu a string of the name or part number of a BikePart.
+ * @param otherInv The name of inventory file that the totalinventory.txt file is be compared to.
+ * @param quantity Holds the quantity of value from a BikePart that is being entered.
+ * @param state An integer that determines the exact behavior of the method.
+ * @return A BikePart LinkedList is returned.
+ * @throws IOException
+ */
+	public static LinkedList<BikePart> searchBikePartList(LinkedList<BikePart> bPLL, String naNu, String otherInv, int quantity, int state) throws IOException{
+		
+		int check = 0;
+ 		LinkedList<BikePart> otherInvLL = Importer.Import(otherInv, 1);
+ 		BikePart otherBP = searchBikePartList(otherInvLL, naNu);
+		
+ 		for (BikePart currentPart : bPLL) 
+		{
+			if(state==0) {
+ 			if (currentPart.getName().equalsIgnoreCase(naNu)) 
+			{
+				int nq = currentPart.getQuantity() + quantity;
+				currentPart.setQuantity(nq);
+				check++; 
+				
+				
+			}
+			else if (currentPart.getNumber().equals(naNu)) 
+			{
+				int nq = currentPart.getQuantity() + quantity;
+				currentPart.setQuantity(nq);
+				check++;
+				
+			}
+		
+		
+	    }
+			else if(state == 1)
+			{
+				if(currentPart.getName().equalsIgnoreCase(otherBP.getName())){
+					int nq = currentPart.getQuantity() - 1;
+					currentPart.setQuantity(nq);
+				}
+			}
+	
+		}
+ 		if(state==0) {
+ 		if(check==0) {
+			bPLL.add(otherBP);
+			return bPLL;
+		}
+ 		}
+		return bPLL;
+}}

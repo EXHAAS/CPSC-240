@@ -126,4 +126,68 @@ public class Van
       return bikePartsMain;  
       //returns updated linked list with part removed
     }
+    
+/*Allows the user to select a warehouse/van file that will have inventory
+*moved FROM it. Loops through the list until the user has selected all the
+*parts they wish to move.
+*
+*@author Eleanor Haas
+*@param fileName The name of the file the inventory is taken from
+*@return A LinkedList of BikeParts to be moved to the chosen location
+*/
+   public static LinkedList<BikePart> chooseParts(String fileName, Scanner s) throws IOException{      
+      LinkedList<BikePart> houseList = Importer.Import(fileName, 1);
+      LinkedList<BikePart> toMove = new LinkedList<BikePart>();
+      boolean cont = true;
+
+      while(cont == true){
+         System.out.println("What inventory would you like to move?\n\n");      
+         ListIterator list = houseList.listIterator(0);
+         while(list.hasNext()){
+            BikePart part = (BikePart)list.next();
+            System.out.println(part.getName() + " " + part.getQuantity());
+         }
+         
+         
+         System.out.println("Enter the name of the part: ");
+         String name = s.next();
+         
+         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
+            
+         if(temp == null){
+            System.out.println("You have entered an invalid part");
+         }else{
+            boolean cont2 = true;
+            while(cont2 == true){
+               System.out.println("There are " + temp.getQuantity() + " parts in this warehouse.");
+               System.out.println("How many would you like to move? Enter the number:");
+               int num = s.nextInt();
+               
+               if(num > temp.getQuantity()){
+                  System.out.println("You have selected more parts then there are.");
+                  System.out.println("Please try again\n\n");
+               }else if(num == temp.getQuantity()){
+                  System.out.println("You have chosen to move all the parts");
+                  toMove.add(temp);
+                  temp.setQuantity(0);
+                  cont2 = false;
+               }else{
+                  int dif = temp.getQuantity() - num;
+                  temp.setQuantity(num);
+                  toMove.add(temp);
+                  temp.setQuantity(dif);
+                  cont2 = false;
+               }
+            }
+         }
+         System.out.println("If you are done selecting parts, enter \"exit\", else enter anything");
+         String ans = s.next();
+         
+         if(ans.equalsIgnoreCase("exit")){
+            cont = false;
+         }
+      }
+      Writer.Write(fileName, houseList);
+      return toMove;
+   }
 }

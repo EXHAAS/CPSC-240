@@ -31,6 +31,7 @@ public class MainMethod{
          System.out.println("SortName: Sort parts by part name");
          System.out.println("SortNumber: Sort parts by part number");
          System.out.println("CreateVan: Create a new van for the fleet");
+         System.out.println("MoveInventory: Move BikeParts around warehouses");
          System.out.println("Quit:");
          System.out.println("Enter your choice:");
          
@@ -69,6 +70,18 @@ public class MainMethod{
                String nm = reader.next();
                Writer.Write(nm, blank);
                System.out.println("Your van has been created\n\n");
+               break;
+               
+            case "MOVEINVENTORY":
+               System.out.println("Which file would you like to move from?");
+               //PRINT OUT ALL FILES FROM FLEET + WAREHOUSE
+               String moveFile = reader.next();
+               LinkedList<BikePart> move = Van.chooseParts(moveFile, reader);
+               System.out.println("Which file would you like to move to?");
+               //PRINT OUT ALL FILES AGAIN
+               String toFile = reader.next();
+               Writer.Write(toFile, move);
+               System.out.println("Your inventory has been moved\n\n");
                break;
  
             case "QUIT":

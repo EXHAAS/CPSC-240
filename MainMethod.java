@@ -30,6 +30,7 @@ public class MainMethod{
          System.out.println("Display: Display a part");
          System.out.println("SortName: Sort parts by part name");
          System.out.println("SortNumber: Sort parts by part number");
+         System.out.println("CreateVan: Create a new van for the fleet");
          System.out.println("Quit:");
          System.out.println("Enter your choice:");
          

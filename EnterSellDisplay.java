@@ -29,6 +29,8 @@ public class EnterSellDisplay{
       
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
       
+      
+      
 	   System.out.println("Enter the part's name:");
       String name = s.next();
       System.out.println("How many are there?");
@@ -117,29 +119,33 @@ public class EnterSellDisplay{
       
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
        
-      System.out.println("Enter the part's number: ");
-      String number = s.next();
-      
-      BikePart temp = SearchBikePartList.searchBikePartList(houseList, number);
-      if(temp != null){
-         System.out.println(temp.getName());
-         temp.setQuantity(temp.getQuantity() - 1);
-         if(temp.getOnSale() == true){
-            System.out.println(temp.getSalesPrice());
-            System.out.println("This part is on sale.\n\n");
+      if(houseList.size() != 0){
+         System.out.println("Enter the part's number: ");
+         String number = s.next();
+         
+         BikePart temp = SearchBikePartList.searchBikePartList(houseList, number);
+         if(temp != null){
+            System.out.println(temp.getName());
+            temp.setQuantity(temp.getQuantity() - 1);
+            if(temp.getOnSale() == true){
+               System.out.println(temp.getSalesPrice());
+               System.out.println("This part is on sale.\n\n");
+            }else{
+               System.out.println(temp.getListPrice());
+               System.out.println("This part is not on sale.\n\n");
+            }
          }else{
-            System.out.println(temp.getListPrice());
-            System.out.println("This part is not on sale.\n\n");
+            System.out.println("This part was not in the system.\n\n");
          }
+         
+         Date time = new Date();
+         SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
+         System.out.println(form.format(time));  
+         
+         Writer.Write(whName, houseList);
       }else{
-         System.out.println("This part was not in the system.\n\n");
-      }
-      
-      Date time = new Date();
-      SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-      System.out.println(form.format(time));  
-      
-      Writer.Write(whName, houseList);  
+         System.out.println("There was nothing there!");
+      }  
    }
    
 /* 

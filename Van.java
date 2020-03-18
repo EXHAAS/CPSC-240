@@ -122,15 +122,16 @@ public class Van
                   System.out.println("You have selected more parts then there are.");
                   System.out.println("Please try again\n\n");
                }else if(num == temp.getQuantity()){
-                  BikePart temp2 = temp;
+            	  BikePart temp2 = new BikePart(temp.getName(), temp.getNumber(), temp.getListPrice(), temp.getSalesPrice(), temp.getOnSale(), temp.getQuantity());
                   System.out.println("You have chosen to move all the parts");
                   toMove.add(temp2);
-                  temp.setQuantity(0);
+                  houseList.remove(temp);
                   cont2 = false;
                }else{
                   BikePart temp2 = temp;
                   int dif = temp.getQuantity() - num;
-                  temp2.setQuantity(num);
+                  
+                  temp2 = new BikePart(temp.getName(), temp.getNumber(), temp.getListPrice(), temp.getSalesPrice(), temp.getOnSale(), num);
                   toMove.add(temp2);
                   temp.setQuantity(dif);
                   cont2 = false;
@@ -145,6 +146,9 @@ public class Van
          }
       }
       Writer.Write(fileName, houseList);
+      for(BikePart p: toMove) {
+    	  p.printInfo();
+      }
       return toMove;
    }
  
@@ -157,14 +161,17 @@ public class Van
    public static void editFile(String fileName, LinkedList<BikePart> move) throws IOException{
       LinkedList<BikePart> houseList = Importer.Import(fileName, 1);
       
-      ListIterator list = move.listIterator(1);
+      ListIterator list = move.listIterator(0);
       while(list.hasNext()){
          BikePart temp = (BikePart) list.next();
          BikePart temp2 = SearchBikePartList.searchBikePartList(houseList, temp.getName());
          
          if(temp2 != null){
-            int num1 = temp.getQuantity();
+            
+        	 int num1 = temp.getQuantity();
+        	 System.out.println(num1);
             temp2.setQuantity(num1);
+            System.out.println(temp2.getQuantity());
             houseList.add(temp2);
          }else{
             houseList.add(temp);

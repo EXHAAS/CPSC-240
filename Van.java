@@ -155,20 +155,21 @@ public class Van
 *@param move The list of BikeParts being moved to the file
 */  
    public static void editFile(String fileName, LinkedList<BikePart> move) throws IOException{
-      LinkedList<BikePart> houseList = Importer.Import(fileName, 0);
+      LinkedList<BikePart> houseList = Importer.Import(fileName, 1);
       
-      ListIterator list = move.listIterator(0);
+      ListIterator list = move.listIterator(1);
       while(list.hasNext()){
          BikePart temp = (BikePart) list.next();
          BikePart temp2 = SearchBikePartList.searchBikePartList(houseList, temp.getName());
          
          if(temp2 != null){
             int num1 = temp.getQuantity();
-            temp2.setQuantity(temp2.getQuantity() + num1);
-         }         
-            
-      }
-      
+            temp2.setQuantity(num1);
+            houseList.add(temp2);
+         }else{
+            houseList.add(temp);
+         }                    
+      }      
       Writer.Write(fileName, houseList);     
    }
 }

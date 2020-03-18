@@ -147,4 +147,28 @@ public class Van
       Writer.Write(fileName, houseList);
       return toMove;
    }
+ 
+/*Makes sure the file isn't overwritten by what's being added
+*
+*@author Eleanor Haas
+*@param fileName The name of the file the parts are being moved to
+*@param move The list of BikeParts being moved to the file
+*/  
+   public static void editFile(String fileName, LinkedList<BikePart> move) throws IOException{
+      LinkedList<BikePart> houseList = Importer.Import(fileName, 0);
+      
+      ListIterator list = move.listIterator(0);
+      while(list.hasNext()){
+         BikePart temp = (BikePart) list.next();
+         BikePart temp2 = SearchBikePartList.searchBikePartList(houseList, temp.getName());
+         
+         if(temp2 != null){
+            int num1 = temp.getQuantity();
+            temp2.setQuantity(temp2.getQuantity() + num1);
+         }         
+            
+      }
+      
+      Writer.Write(fileName, houseList);     
+   }
 }

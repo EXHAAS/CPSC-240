@@ -46,19 +46,16 @@ public class MainMethod{
             case "READ":
                totalInvLL = ReadInventory.readInventory(bikeLL, totalInvLL,reader);              
                Writer.Write("totalinventory.txt", totalInvLL);
-               bikeLL = Importer.Import(warehouseFileName, 0);
-	       break;
+               break;
 
             case "ENTER":
                totalInvLL = EnterSellDisplay.enterPart(reader,totalInvLL);
                Writer.Write("totalinventory.txt", totalInvLL);
-	       bikeLL = Importer.Import(warehouseFileName, 0);	 
                break;                          
             
             case "SELL":
                totalInvLL = EnterSellDisplay.sellPart(reader,totalInvLL);
                Writer.Write("totalinventory.txt", totalInvLL);
-	       bikeLL = Importer.Import(warehouseFileName, 0);	 
                break;
  
             case "DISPLAY":
@@ -93,7 +90,7 @@ public class MainMethod{
                 System.out.println("Which file would you like to move to?");
                 String toFile = reader.next();
                 
-                Writer.Write(toFile, move);
+                Van.editFile(toFile, move);
                 System.out.println("Your inventory has been moved\n\n");
                 break;
   

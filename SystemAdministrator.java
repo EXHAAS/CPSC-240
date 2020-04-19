@@ -40,8 +40,8 @@ public class SystemAdministrator extends Employee{
    }
    
    public SalesAssosiate addSalesVan(String fn, String ln, String email, 
-   String un, String password){//ADD A LINKEDLIST FOR THE INVENTORY?
-      return new SalesAssosiate(fn, ln, email, un, password);
+   String un, String password, String van){//ADD A LINKEDLIST FOR THE INVENTORY?
+      return new SalesAssosiate(fn, ln, email, un, password, van);
    }     
 }
       

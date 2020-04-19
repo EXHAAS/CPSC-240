@@ -11,6 +11,7 @@ public class Employee{
    String email;
    String username;
    String password;
+   String type;
    
    public Employee(String fn, String ln, String email, String un,
       String password){
@@ -19,6 +20,7 @@ public class Employee{
       this.email = email;
       username = un;
       this.password = password;
+      
    }
    
 /*Returns the Employee's first name
@@ -55,7 +57,12 @@ public class Employee{
    public void setUsername(String un){
       this.username = un;
    }
-   
+ /*Returns the account's type
+*@return The account type
+*/      
+   public String getType(){
+      return type;
+   }  
 //NO METHOD TO GET THE PASSWORD BECAUSE THEY SHOULDN'T HAVE THAT
    
 }

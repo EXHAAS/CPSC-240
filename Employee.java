@@ -63,6 +63,21 @@ public class Employee{
    public String getType(){
       return type;
    }  
-//NO METHOD TO GET THE PASSWORD BECAUSE THEY SHOULDN'T HAVE THAT
+  /*
+  *Checks if given password and username match the fields of the employee object.
+  *
+  *@param user given username
+  *@param pass given password
+  *@return returns boolean on whether the the username and password are correct or not.
+  */
+   public boolean check(String user, String pass) 
+  {
+	Boolean x = false;
+	if(user.equals(this.username) && pass.equals(this.password)) {
+		x = true;
+	}	
+	   return x;	   
+   }
+   //NO METHOD TO GET THE PASSWORD BECAUSE THEY SHOULDN'T HAVE THAT
    
 }

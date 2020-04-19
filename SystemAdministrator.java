@@ -36,13 +36,13 @@ public class SystemAdministrator extends Employee{
 /*Deletes an existing account by setting the Employee object to null
 *@param a The account to be deleted
 */
-   public void deleteAccount(Account a){
+   public void deleteAccount(Employee a){
       a = null;
    }
    
-   public SalesAssosiate addSalesVan(String fn, String ln, String email, 
+   public SalesAssociate addSalesVan(String fn, String ln, String email, 
    String un, String password, String van){//ADD A LINKEDLIST FOR THE INVENTORY?
-      return new SalesAssosiate(fn, ln, email, un, password, van);
+      return new SalesAssociate(fn, ln, email, un, password, van);
    }     
 }
       

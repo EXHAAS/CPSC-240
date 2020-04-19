@@ -3,110 +3,20 @@
 *unauthorized help on this work
 *
 *@author Ellie Haas
+*@author Anthony Tompkins
 */
 
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 public class EnterSellDisplay{
-   
-/*
-*Designed for the user to manually enter a part. Asks the user for the name and 
-*quantity of the part they wish to enter, then searches through the inventory list
-*to see if the part is already there. If it is, then the quantity of the part is 
-*increased by the quantity they entered. If it is not, the system prompts for the 
-*rest of the information then adds it to the end of the LinkedList.
-*
-*@param s The Scanner passed in from the main method
-*@param l The inventory LinkedList that's searched/added to
-*/
-
-	public static LinkedList<BikePart> enterPart(Scanner s, LinkedList<BikePart> totalInvLL) throws IOException{
-      System.out.println("Enter the name of the warehouse:");
-      String whName = s.next();
-      
-      LinkedList<BikePart> houseList = Importer.Import(whName, 0);
-      
-   	   System.out.println("Enter the part's name:");
-         String name = s.next();
-         System.out.println("How many are there?");
-         
-         String quantityString = s.next();
-         int flag = 1;
-         String qInput = inputCheck(quantityString, flag);
-         if(qInput == null) {
-            System.out.println("Invalid Input \n\n");
-       	   return totalInvLL;
-         }
-         
-         int quantity = Integer.parseInt(quantityString);
-         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
-         
-   //CHECK IF THE PART WAS IN THE SYSTEM ALREADY. IF SO, INCREMENT THE QUANTITY. IF
-   //NOT, CONTINUE TO PROMPT FOR INFORMATION 
-         if(temp != null){
-            System.out.println("The part was already in the system.\n\n");
-            int var1 = temp.getQuantity();
-            temp.setQuantity(var1 + quantity);
-            Writer.Write(whName, houseList);
-            return SearchBikePartList.searchBikePartList(totalInvLL, temp.getName(), whName, quantity, 0); 
-         }else{            
-            System.out.println("Enter the part's number:");
-            String number = s.next();
-            System.out.println("Enter the part's list price:");
-            
-            flag = 2;
-            String lPriceString = s.next();
-            String lPInput = inputCheck(lPriceString, flag);
-            if(lPInput == null) {
-               System.out.println("Invalid Input \n\n");
-              	return totalInvLL;
-            }
-            double lPrice = Double.parseDouble(lPriceString);
-            System.out.println("Enter the part's sales price:");
-            
-            
-            String sPriceString = s.next();
-            String sPInput = inputCheck(lPriceString, flag);
-            if(sPInput == null) {
-               System.out.println("Invalid Input \n\n");
-              	return totalInvLL;
-            }
-            double sPrice = Double.parseDouble(sPriceString);
-            
-            boolean sale = false;
-            boolean loop = true;
-            
-            while(loop == true){
-               System.out.println("Is the part on sale? y/n");
-               String ans = s.next();
-               if(ans.equalsIgnoreCase("y")){
-                  sale = true;
-                  loop = false;
-               }else if(ans.equalsIgnoreCase("n")){
-                  sale = false;
-                  loop = false;
-               }else{
-                  System.out.println("You entered an invalid response, please try " + 
-                  "again");
-               } 
-            }           
-            
-            BikePart part = new BikePart(name, number, lPrice, sPrice, sale, quantity);
-            houseList.add(part);
-            System.out.println("The part has been sucessfully added!\n\n");
-            
-            Writer.Write(whName, houseList);
-         return SearchBikePartList.searchBikePartList(totalInvLL, part.getName(), whName, 0, 0);   
-         }
-         
-         
-   }
-      
-      
- 
+	
 /*
 *Designed to sell the user a part. The user inputs the number of the part, then the
 *system searches through the list to see if it's there. If it is, then the price of
@@ -114,48 +24,192 @@ public class EnterSellDisplay{
 *date of the sale.
 *
 *@param s The Scanner passed in from the main method
-*@param l The inventory LinkedList being searched through
+*@param totalInvLL The LinkedList of BikeParts from the complete inventory
+*@param ac Employee account passed from MainMethod
+*@return Return LinkedList of BikeParts to be used to update the total inventory
 */ 
-   public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL) throws IOException{
-      System.out.println("Enter the name of the warehouse:");
-      String whName = s.next();
-      
+   public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL, Employee ac) throws IOException{
+	   // String to format total in invoices
+	   DecimalFormat df = new DecimalFormat("#.##");
+	   // Used to append new invoices to Invoice.txt file
+	   FileWriter invoiceWriter = new FileWriter("Invoices.txt",true);
+	   s.nextLine();
+	   Date time = new Date();
+       SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
+       SalesAssociate sa = (SalesAssociate)ac;
+       // Keeps track of final total of the transaction
+       double finalTotal = 0;
+       String whName = sa.getVan();
+       System.out.println();  
+	  
+       System.out.println("Enter the name of the bike shop");
+	   String shopName = s.nextLine();
+	   System.out.println("Enter the client's name");
+	   String client = s.nextLine();
+	   
+	   String date = form.format(time).toString();
+	   
+	   String invoice =  "Sales Associate: " + sa.getFirstName() + " " + sa.getLastName() + "\n" 
+	   + "Sales Invoice for " + shopName + " " + date + "\nName                   Number                 Price                 Sold                    Total\n" ;
+	  
+	   
+                  
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
-       
-      if(houseList.size() != 0){
-         System.out.println("Enter the part's number: ");
-         String number = s.next();
-         
-         BikePart temp = SearchBikePartList.searchBikePartList(houseList, number);
-         if(temp != null){
-            System.out.println(temp.getName());
-            temp.setQuantity(temp.getQuantity() - 1);
-            if(temp.getOnSale() == true){
-               System.out.println(temp.getSalesPrice());
-               System.out.println("This part is on sale.\n\n");
-            }else{
-               System.out.println(temp.getListPrice());
-               System.out.println("This part is not on sale.\n\n");
-            }
-         }else{
-            System.out.println("This part was not in the system.\n\n");
+      
+      // Creates new Invoices.txt file if one does no exist
+          File invFile = new File("Invoices.txt");
+          invFile.createNewFile();
+          
+      // Boolean to keep track if more items are to be sold  
+      boolean cont = true;
+      // Boolean to keep track if a new invoice was made
+      boolean invoiceMade = false;
+      while(cont == true)
+      {
+         System.out.println("Current Inventory:\n");      
+         ListIterator<BikePart> list = houseList.listIterator(0);
+         //Iterates through list of parts and prints their name, number, and quantity
+         while(list.hasNext())
+         {
+            BikePart part = (BikePart)list.next();
+            System.out.println(part.getName() + ", " + part.getNumber() + " Quantity: " + part.getQuantity());
          }
          
-         Date time = new Date();
-         SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
-         System.out.println(form.format(time));  
          
-         Writer.Write(whName, houseList);
-     return SearchBikePartList.searchBikePartList(totalInvLL, temp.getName(), whName, 0, 1);
-      }else{
-         System.out.println("There was nothing there!\n\n");
-      }
- //     return ReadInventory.readInventory(whName, totalInvLL);  
+         System.out.println("Enter part name or number: ");
+         String name = s.nextLine();
+         
+         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
+         BikePart toBP = SearchBikePartList.searchBikePartList(totalInvLL, name);
+            
+         if(temp == null)
+         {
+            System.out.println("You have entered an invalid part");
+         }
+         else
+         {
+            boolean cont2 = true;
+            while(cont2 == true){
+               System.out.println("There are " + temp.getQuantity() + " parts in this warehouse.");
+               System.out.println("How many part are being sold?:");
+               int num = s.nextInt();
+        	   s.nextLine();
+
+               String sNum = Integer.toString(num);
+               if(num > temp.getQuantity()){
+                  System.out.println("You have selected more parts then there are.");
+                  System.out.println("Please try again\n\n");
+               }
+               else if(num == temp.getQuantity())
+               {
+                  System.out.println("All" + temp.getName() + "'s" + " have been sold");
+                  if(temp.getOnSale()) 
+                  {
+                  
+                  double total = temp.getSalesPrice() * num;
+                  finalTotal += total;
+                  String totalS = df.format(total);                 
+                  String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                  if(!invoiceMade) 
+                  {
+                	  invoiceWriter.write(invoice);
+                	  invoiceMade = true;
+                  }
+                  invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getSalesPrice()), sNum, "$" + totalS));
+                  invoiceWriter.write("\n");
+              
+                  }
+                  else 
+                  {
+                	  double total = temp.getListPrice() * num;
+                      finalTotal += total;
+                	  String totalS = df.format(total);
+
+                	  String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                      if(!invoiceMade) 
+                      {
+                    	  invoiceWriter.write(invoice);
+                    	  invoiceMade = true;
+                      }
+                      invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getListPrice()), sNum, "$" + totalS));
+                      invoiceWriter.write("\n");
+                  
+                  }
+                  
+                  houseList.remove(temp);
+                  
+                  if(toBP.getQuantity() == num) {
+                	  totalInvLL.remove(toBP);
+                  }
+                  else
+                  {
+                	  toBP.setQuantity(toBP.getQuantity() - num);
+                  }
+                  
+                  cont2 = false;
+               }
+            else
+            {
+            	if(temp.getOnSale()) 
+                {
+                
+                double total = temp.getSalesPrice() * num;
+                
+                finalTotal += total;
+                String totalS = df.format(total);
+                String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                if(!invoiceMade) 
+                {
+              	  invoiceWriter.write(invoice);
+              	  invoiceMade = true;
+                }
+                invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getSalesPrice()), sNum, "$" + totalS));
+                invoiceWriter.write("\n");
+                }
+                else 
+                {
+              	    double total = temp.getListPrice() * num;
+              	    finalTotal += total;  
+              	    String totalS = df.format(total);
+                    String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                    if(!invoiceMade) 
+                    {
+                  	  invoiceWriter.write(invoice);
+                  	  invoiceMade = true;
+                    }
+                    invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getListPrice()), sNum,  "$" + totalS));
+                    invoiceWriter.write("\n");
+                }
+            	  int dif = temp.getQuantity() - num;
+
+                  temp.setQuantity(dif);
+                  toBP.setQuantity(toBP.getQuantity() - num);
+                  cont2 = false;
+               }
+            }
+         }
+         System.out.println("If the transaction is complete, enter \"exit\", else enter anything");
+         String ans = s.next();
+  	     s.nextLine();
+
+         if(ans.equalsIgnoreCase("exit")){
+            cont = false;
+            if(invoiceMade) 
+            {
+            	String finalTotalS = df.format(finalTotal);
+            	String form2 = "%-92s";
+            	invoiceWriter.write(String.format(form2, "Total:") + "$" + finalTotalS + "\n\nReceived by: " + client +"\n\n\n");
+            }
+            invoiceWriter.close();
+           
+         }
+      }                
+         
+    Writer.Write(whName, houseList); 
 	return totalInvLL;
-      
-	
-      
-   }
+     	
+}  
+   
    
 /* 
 *Designed to display the information of a part. The user inputs the part's name and

@@ -20,45 +20,131 @@ public class MainMethod{
 	  LinkedList<BikePart> bikeLL = Importer.Import(warehouseFileName, 0);
 	  LinkedList<BikePart> totalInvLL = Importer.Import("totalinventory.txt", 0);
 	  
+	  LinkedList<Employee> accounts = new LinkedList<Employee>();
+	  
 	  Scanner reader = new Scanner(System.in);
-      boolean loop = true;
       
-      while(loop == true){
+      // Boolean for keeping the program running
+      boolean running = true;
+      // Boolean to check if an account is signed in
+      boolean loggedIn = false;
+      // Boolean for signing in.
+      boolean again = true;
+      
+ /*     SalesAssociate x = new SalesAssociate("Bob","Bobby","email","user","pass","S.txt"); // Account for testing
+      
+    accounts.add(x);
+ */       
+      Employee ac = null;
+      while(running == true) 
+      {
+      
+      while(again) 
+      {
+      System.out.println("Enter Username:");
+      String username = reader.next();
+      System.out.println("Enter Password:");
+      String password = reader.next();
+      
+      for(Employee a:accounts) 
+      {
+      
+      if(a.check(username, password)) 
+      {
+    	  ac = a;
+    	  loggedIn =true;
+    	  again = false;
+      }
+      
+      if(!loggedIn) {
+    	  System.out.println("Incorrect login details.");
+      }
+      }  
+      }  
+      while(loggedIn == true){
     	//PRINT THE USERS CHOICES, THEN LET THEM ENTER THEIR CHOICE
-          System.out.println("Please select your option from the following menu:");
-          System.out.println("Read: Read an inventory delivery file");
-          System.out.println("Enter: Enter a part");
-          System.out.println("Sell: Sell a part");
-          System.out.println("Display: Display a part");
-          System.out.println("SortName: Sort parts by part name");
+          System.out.println("\nhello " + ac.getFirstName() + " " + ac.getLastName()+ "\n");
+    	  
+    	  if(ac.getType().equals("SystemAdminstrator")) 
+	  {
+        	
+    	  System.out.println("Please select your option from the following menu:");
+    	  System.out.println("Logout: Sign off");
+    	  System.out.println("Quit:");
+    	  System.out.println("Enter your choice:");
+    	  
+    	  }
+    	  if(ac.getType().equals("OfficeManager")) 
+	  {
+        	  
+    	  System.out.println("Please select your option from the following menu:");
+    	  System.out.println("Display: Display a part");
+    	  System.out.println("SortName: Sort parts by part name");
           System.out.println("SortNumber: Sort parts by part number");
-          System.out.println("CreateVan: Create a new van for the fleet");
-          System.out.println("MoveInventory: Move BikeParts around warehouses");
-          System.out.println("Quit:");
-          System.out.println("Enter your choice:");
+    	  System.out.println("Enter your choice:");
+    	  System.out.println("Logout: Sign off");
+    	  System.out.println("Quit:");
+    	  
+    	  }
+    	  if(ac.getType().equals("WarehouseManager")) 
+	  {
+    	  
+    	  System.out.println("Please select your option from the following menu:");
+    	  System.out.println("Read: Read an inventory delivery file");
+    	  System.out.println("Display: Display a part");
+    	  System.out.println("SortName: Sort parts by part name");
+          System.out.println("SortNumber: Sort parts by part number");
+          System.out.println("Logout: Sign off");
+	  System.out.println("Quit:");
+	  System.out.println("Enter your choice:");
+
+    	  }
+	  if(ac.getType().equals("SalesAssociate")) 
+	  {
+	      
+	  System.out.println("Please select your option from the following menu:");
+	  System.out.println("Sell: Sell parts");
+	  System.out.println("LoadInventory: Load new inventory");
+	  System.out.println("Logout: Sign off");
+	  System.out.println("Quit:");
+	  System.out.println("Enter your choice:");
+	      
+	  }
+
+          
+          
+ //         System.out.println("CreateVan: Create a new van for the fleet");
+
           
           String choice = reader.next();
-          
           LinkedList<BikePart> blank = new LinkedList<BikePart>();
           
  //CALL WHICHEVER METHOD THE READER CHOSE. LOOP UNTIL QUIT IS CHOSEN           
          switch(choice.toUpperCase()){
-            case "READ":
+            case "READ":  
+               if(ac.getType().equals("WarehouseManager")) 
+               {          	   
                totalInvLL = ReadInventory.readInventory(bikeLL, totalInvLL,reader);              
                Writer.Write("totalinventory.txt", totalInvLL);
                bikeLL = Importer.Import(warehouseFileName, 0);
+               }
+               else 
+               {
+            	   System.out.println("Invalid Command");
+               }
 	       break;
 
-            case "ENTER":
-               totalInvLL = EnterSellDisplay.enterPart(reader,totalInvLL);
-               Writer.Write("totalinventory.txt", totalInvLL);
-               bikeLL = Importer.Import(warehouseFileName, 0);	 
-               break;                          
-            
             case "SELL":
-               totalInvLL = EnterSellDisplay.sellPart(reader,totalInvLL);
+               if(ac.getType().equals("SalesAssociate")) 
+               {
+               totalInvLL = EnterSellDisplay.sellPart(reader,totalInvLL, ac);
                Writer.Write("totalinventory.txt", totalInvLL);
-	       bikeLL = Importer.Import(warehouseFileName, 0);	 
+	           bikeLL = Importer.Import(warehouseFileName, 0);
+               }
+               else 
+               {
+            	   System.out.println("Invalid Command");
+               }
                break;
  
             case "DISPLAY":
@@ -66,11 +152,25 @@ public class MainMethod{
                break;
  	    
 	         case "SORTNAME":
-               SortNameNumber.sortNameNumber(choice, reader);
+               if(ac.getType().equals("WarehouseManager") || ac.getType().equals("OfficeManager")) 
+               {
+	           SortNameNumber.sortNameNumber(choice, reader);
+               }
+               else 
+               {
+            	   System.out.println("Invalid Command");
+               }
                break;
 
             case "SORTNUMBER":
-               SortNameNumber.sortNameNumber(choice, reader);
+            	if(ac.getType().equals("WarehouseManager") || ac.getType().equals("OfficeManager")) 
+                {
+ 	           SortNameNumber.sortNameNumber(choice, reader);
+                }
+                else 
+                {
+             	   System.out.println("Invalid Command");
+                }
                break;
                
             case "CREATEVAN":
@@ -81,25 +181,40 @@ public class MainMethod{
                 System.out.println("Your van has been created\n\n");
                 break;
                 
-             case "MOVEINVENTORY":
-                Fleet.printFleet();
+             case "LOADINVENTORY":
+                if(ac.getType().equals("SalesAsscociate")) 
+                {
+            	Fleet.printFleet();
                 System.out.println("warehouseDB.txt");
-                System.out.println("Which file would you like to move from?");
+                System.out.println("Which warehouse are you receiving inventory from?");
                 String moveFile = reader.next();
                 LinkedList<BikePart> move = Van.chooseParts(moveFile, reader);
 
                 Fleet.printFleet();
                 System.out.println("warehouseDB.txt");
-                System.out.println("Which file would you like to move to?");
-                String toFile = reader.next();
+                System.out.println("Which file would you like to move to?");               
+                String toFile = ((SalesAssociate) ac).getVan();
                 
                 Van.editFile(toFile, move);
                 System.out.println("Your inventory has been moved\n\n");
+                }
+                else 
+                {
+             	   System.out.println("Invalid Command");
+                }
                 break;
   
+             case "LOGOUT":
+            	 
+            	 System.out.println("Logout Successful");
+            	 again = true;
+            	 loggedIn = false;
+            	 break;
+             
              case "QUIT":
                 System.out.println("Thank you!");
-                loop = false;
+                running = false;
+                loggedIn = false;
                 break;               
 
              default:
@@ -111,6 +226,9 @@ public class MainMethod{
       //USE THE WRITER CLASS TO WRITE THE LINKEDLIST TO A FILE     
       
       
-      reader.close();        
+         
+      
+   }
+      reader.close();
    }
 }

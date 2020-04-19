@@ -65,7 +65,7 @@ public class MainMethod{
     	//PRINT THE USERS CHOICES, THEN LET THEM ENTER THEIR CHOICE
           System.out.println("\nhello " + ac.getFirstName() + " " + ac.getLastName()+ "\n");
     	  
-    	  if(ac.getType().equals("SystemAdminstrator")) 
+    	  if(ac.getType().equals("SystemAdministrator")) 
 	  {
         	
     	  System.out.println("Please select your option from the following menu:");

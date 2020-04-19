@@ -14,7 +14,7 @@ public class SystemAdministrator extends Employee{
    public SystemAdministrator(String fn, String ln, String email, String un,
       String password){
       super(fn, ln, email, un, password);
-      this.type = "SystemAdminstrator";
+      this.type = "SystemAdministrator";
    }
 
 /*Creates and returns an OfficeManager object

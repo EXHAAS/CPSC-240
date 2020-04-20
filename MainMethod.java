@@ -82,9 +82,9 @@ public class MainMethod{
     	  System.out.println("Display: Display a part");
     	  System.out.println("SortName: Sort parts by part name");
           System.out.println("SortNumber: Sort parts by part number");
-    	  System.out.println("Enter your choice:");
     	  System.out.println("Logout: Sign off");
     	  System.out.println("Quit:");
+    	  System.out.println("Enter your choice:");
     	  
     	  }
     	  if(ac.getType() == 3) {
@@ -180,73 +180,64 @@ public class MainMethod{
                break;
                
             case "CREATE":
+            	
             	if(ac.getType()==1) 
             	{
-            	System.out.println("Enter:\n1: New system admin\n2: New Office Manager\n3: New Warehouse Manager\n4: New Sales Associate");
-            	int na = reader.nextInt();
-            	if(na==1) 
-            	{
             		
-            		System.out.println("Enter First Name:");
-            		String fn = reader.next();
+            		Boolean taken = true;
+            	        System.out.println("Enter First Name:");
+            		String fn = reader.next();          		
             		System.out.println("Enter Last Name:");
-            		String ln = reader.next();
+            		String ln = reader.next();            		
             		System.out.println("Enter Email:");
-            		String e = reader.next();
+            		String e = reader.next();            		
+            		String u = null;
             		System.out.println("Enter Username:");
-            		String u = reader.next();
+            		while(taken) 
+            		{
+            		int count = 0;
+            		u = reader.next();
+            		for(Employee acc:accounts) 
+            		{
+            			if(acc.getUsername().equals(u)) 
+            			{
+            				System.out.println("\nThat username is taken\nEnter Username:\n");
+            				count += 1;
+            			}
+            		}
+            		if(count == 0) 
+            		{
+            			taken = false;
+            		}
+            		
+            		}
+            		
             		System.out.println("Enter Password:");
             		String p = reader.next();
-            		accounts.add(new SystemAdministrator(fn,ln,e,u,p));
-            		System.out.println("Account Creation Successful");
             		
+            		System.out.println("Enter:\n1: New System Administrator\n2: New Office Manager\n3: New Warehouse Manager\n4: New Sales Associate");
+            	    int na = reader.nextInt();
+            	
+            	
+            	if(na==1) 
+            	{           		
+            		accounts.add(new SystemAdministrator(fn,ln,e,u,p));
+            		System.out.println("Account Creation Successful");            		
             	}
             	else if(na==2) 
-            	{
-            		System.out.println("Enter First Name:");
-            		String fn = reader.next();
-            		System.out.println("Enter Last Name:");
-            		String ln = reader.next();
-            		System.out.println("Enter Email:");
-            		String e = reader.next();
-            		System.out.println("Enter Username:");
-            		String u = reader.next();
-            		System.out.println("Enter Password:");
-            		String p = reader.next();
+            	{           	
             		accounts.add(new OfficeManager(fn,ln,e,u,p));
             		System.out.println("Account Creation Successful");
             	}
             	else if(na==3) 
             	{
-            		System.out.println("Enter First Name:");
-            		String fn = reader.next();
-            		System.out.println("Enter Last Name:");
-            		String ln = reader.next();
-            		System.out.println("Enter Email:");
-            		String e = reader.next();
-            		System.out.println("Enter Username:");
-            		String u = reader.next();
-            		System.out.println("Enter Password:");
-            		String p = reader.next();
             		accounts.add(new WarehouseManager(fn,ln,e,u,p));
             		System.out.println("Account Creation Successful");
             	}
             	else if(na==4) 
             	{
-            		
-            		System.out.println("Enter First Name:");
-            		String fn = reader.next();
-            		System.out.println("Enter Last Name:");
-            		String ln = reader.next();
-            		System.out.println("Enter Email:");
-            		String e = reader.next();
-            		System.out.println("Enter Username:");
-            		String u = reader.next();
-            		System.out.println("Enter Password:");
-            		String p = reader.next();
             		System.out.println("Enter Van Name");
-            		String v = reader.next();
-            		
+            		String v = reader.next();            		
             		accounts.add(new SalesAssociate(fn,ln,e,u,p,v));
             		System.out.println("Account Creation Successful\n");
             		Writer.Write(v, blank);
@@ -315,5 +306,6 @@ public class MainMethod{
       
    }
       reader.close();
+      Accounts.writeAccount(accounts);
    }
 }

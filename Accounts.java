@@ -122,8 +122,7 @@ public class Accounts
     
     
     
-    public static void writeAccount(LinkedList<OfficeManager> omList, LinkedList<SystemAdministrator> adminList, LinkedList<SalesAssociate> saleList,
-    LinkedList<WarehouseManager> wmList) throws IOException
+    public static void writeAccount(LinkedList<Employee> accounts) throws IOException
     {
         // initialise instance variables
         //x = 0;
@@ -133,85 +132,43 @@ public class Accounts
         FileInputStream fileIn= new FileInputStream(outputDirectory);
       
       Scanner scnr = new Scanner(fileIn); //Basic Scanner
-      ListIterator<OfficeManager> omIt = omList.listIterator(); 
-      OfficeManager currentOm; 
+      ListIterator<Employee> acIt = accounts.listIterator(); 
+      Employee currentE; 
       
         int aqq = 0;
         int flag = 0;
         try {
         while (flag == 0) {
         //out.println 
-        currentOm = omIt.next();
-        out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
+        currentE = acIt.next();
+        
+        //Current employee account type
+        int cet = currentE.getType();
+        
+        if(cet==1) {
+        	out.println("ADMIN`" +currentE.getFirstName() + "`" + currentE.getLastName() + "`" + currentE.getEmail() + "`" + currentE.getUsername() + "`" + currentE.getPassword());
+        }
+        else if(cet==2) {
+        	out.println("OM`" +currentE.getFirstName() + "`" + currentE.getLastName() + "`" + currentE.getEmail() + "`" + currentE.getUsername() + "`" + currentE.getPassword());
+        }
+        else if(cet==3) {
+            out.println("WM`" +currentE.getFirstName() + "`" + currentE.getLastName() + "`" + currentE.getEmail() + "`" + currentE.getUsername() + "`" + currentE.getPassword());
+
+        }
+        else if(cet==4) {
+            String van = ((SalesAssociate) currentE).getVan();
+        	out.println("SALE`" +currentE.getFirstName() + "`" + currentE.getLastName() + "`" + currentE.getEmail() + "`" + currentE.getUsername() + "`" + currentE.getPassword() + "`" + van);
+        }       
         }
     }
     catch (java.util.NoSuchElementException exception){
         flag = 1; //end loop
         
-    }
-        
-    ///////////////////ToBeImplemented////////////////////////
-    
-    
-      ListIterator<SystemAdministrator> adminIt = adminList.listIterator(); 
-      SystemAdministrator currentAdmin; 
-      
-         aqq = 0;
-         flag = 0;
-        try {
-        while (flag == 0) {
-        //out.println 
-        currentAdmin = adminIt.next();
-        out.println("ADMIN`" +currentAdmin.getFirstName() + "`" + currentAdmin.getLastName() + "`" + currentAdmin.getEmail() + "`" + currentAdmin.getUsername() + "`" + currentAdmin.getPassword());
-        }
-    }
-    catch (java.util.NoSuchElementException exception){
-        flag = 1; //end loop
-        
+    }          
+        out.flush();       
+        fileIn.close();       
     }
     
-    
-      ListIterator<SalesAssociate> saleIt = saleList.listIterator(); 
-      SalesAssociate currentSale; 
-      
-        aqq = 0;
-        flag = 0;
-        try {
-        while (flag == 0) {
-        //out.println 
-        currentSale = saleIt.next();
-        out.println("SALE`" +currentSale.getFirstName() + "`" + currentSale.getLastName() + "`" + currentSale.getEmail() + "`" + currentSale.getUsername() + "`" + currentSale.getPassword() + currentSale.getVan());
-        }
-    }
-    catch (java.util.NoSuchElementException exception){
-        flag = 1; //end loop
-        
-    }
-    
-      ListIterator<WarehouseManager> wmIt = wmList.listIterator(); 
-      WarehouseManager currentWM; 
-      
-        aqq = 0;
-        flag = 0;
-        try {
-        while (flag == 0) {
-        //out.println 
-        currentWM = wmIt.next();
-        out.println("WM`" +currentWM.getFirstName() + "`" + currentWM.getLastName() + "`" + currentWM.getEmail() + "`" + currentWM.getUsername() + "`" + currentWM.getPassword());
-        }
-    }
-    catch (java.util.NoSuchElementException exception){
-        flag = 1; //end loop
-        
-    }
-    
-    
-    
-        out.flush();
-        
-        fileIn.close();
-        
-    }
     
     public static LinkedList<OfficeManager> readOm() throws IOException
     {

@@ -20,16 +20,104 @@ public class Accounts
     /**
      * Constructor for objects of class Accounts
      */
-    public static void Accounts()
+    public static LinkedList<Employee> Employees() throws IOException
     {
         // initialise instance variables
         //x = 0;
+        LinkedList<Employee> employees = new LinkedList<Employee>();
+        //employees.add(new SalesAssociate("Bob","Bobby","email","user","pass","S.txt")); 
         
+        LinkedList<OfficeManager> omList = readOm();
+        LinkedList<WarehouseManager> wmList = readWm();
+        LinkedList<SystemAdministrator> adminList = readAdmin();
+        LinkedList<SalesAssociate> saleList = readSale();
         
+    
+      ListIterator<OfficeManager> omIt = omList.listIterator(); 
+      OfficeManager currentOm; 
+      
+      ListIterator<WarehouseManager> wmIt = wmList.listIterator(); 
+      WarehouseManager currentWm; 
+      
+      ListIterator<SystemAdministrator> adminIt = adminList.listIterator(); 
+      SystemAdministrator currentAdmin; 
+      
+      ListIterator<SalesAssociate> saleIt = saleList.listIterator(); 
+      SalesAssociate currentSale; 
+      
+        int aqq = 0;
+        int flag = 0;
+        try {
+        while (flag == 0) {
+        //out.println 
         
+        currentOm = omIt.next();
+        employees.add(currentOm);
+        //out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
+        }
+    }
+    catch (java.util.NoSuchElementException exception){
+        flag = 1; //end loop
         
+    }
+    
+        aqq = 0;
+        flag = 0;
+        try {
+        while (flag == 0) {
+        //out.println 
         
+        currentWm = wmIt.next();
+        employees.add(currentWm);
+        //out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
+        }
+    }
+    catch (java.util.NoSuchElementException exception){
+        flag = 1; //end loop
         
+    }
+        
+        aqq = 0;
+        flag = 0;
+        try {
+        while (flag == 0) {
+        //out.println 
+        
+        currentAdmin = adminIt.next();
+        employees.add(currentAdmin);
+        //out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
+        }
+    }
+    catch (java.util.NoSuchElementException exception){
+        flag = 1; //end loop
+        
+    }
+    
+        aqq = 0;
+        flag = 0;
+        try {
+        while (flag == 0) {
+        //out.println 
+        
+        currentSale = saleIt.next();
+        employees.add(currentSale);
+        //out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
+        }
+    }
+    catch (java.util.NoSuchElementException exception){
+        flag = 1; //end loop
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      return employees;  
     }
     
     
@@ -158,7 +246,7 @@ public class Accounts
         OfficeManager om = new OfficeManager(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5]); 
         omList.addLast(om);
         
-        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
+        //System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
         }
         
         //b5 = (int) Double.parseDouble(rawList[5]); 
@@ -217,7 +305,7 @@ public class Accounts
         WarehouseManager wm = new WarehouseManager(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5]); 
         wmList.addLast(wm);
         
-        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
+        //System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
         }
         
         //b5 = (int) Double.parseDouble(rawList[5]); 
@@ -277,7 +365,7 @@ public class Accounts
         SystemAdministrator admin = new SystemAdministrator(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5]); 
         adminList.addLast(admin);
         
-        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
+        //System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
         }
         
         //b5 = (int) Double.parseDouble(rawList[5]); 
@@ -339,7 +427,7 @@ public class Accounts
         SalesAssociate sale = new SalesAssociate(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5],rawList[6]); 
         saleList.addLast(sale);
         
-        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5] + rawList[6]); 
+        //System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5] + rawList[6]); 
         }
         
         //b5 = (int) Double.parseDouble(rawList[5]); 

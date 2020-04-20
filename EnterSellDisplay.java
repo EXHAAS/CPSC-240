@@ -30,7 +30,6 @@ public class EnterSellDisplay{
 */ 
    public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL, Employee ac) throws IOException{
 	   // String to format total in invoices
-	   DecimalFormat df = new DecimalFormat("#.##");
 	   // Used to append new invoices to Invoice.txt file
 	   FileWriter invoiceWriter = new FileWriter("Invoices.txt",true);
 	   s.nextLine();
@@ -102,20 +101,20 @@ public class EnterSellDisplay{
                }
                else if(num == temp.getQuantity())
                {
-                  System.out.println("All" + temp.getName() + "'s" + " have been sold");
+                  System.out.println("All " + temp.getName() + "'s" + " have been sold");
                   if(temp.getOnSale()) 
                   {
                   
                   double total = temp.getSalesPrice() * num;
                   finalTotal += total;
-                  String totalS = df.format(total);                 
+                  String totalS = String.format("%.2f", total);                
                   String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
                   if(!invoiceMade) 
                   {
                 	  invoiceWriter.write(invoice);
                 	  invoiceMade = true;
                   }
-                  invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getSalesPrice()), sNum, "$" + totalS));
+                  invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                   invoiceWriter.write("\n");
               
                   }
@@ -123,7 +122,7 @@ public class EnterSellDisplay{
                   {
                 	  double total = temp.getListPrice() * num;
                       finalTotal += total;
-                	  String totalS = df.format(total);
+                	  String totalS = String.format("%.2f", total);                
 
                 	  String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
                       if(!invoiceMade) 
@@ -131,7 +130,7 @@ public class EnterSellDisplay{
                     	  invoiceWriter.write(invoice);
                     	  invoiceMade = true;
                       }
-                      invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getListPrice()), sNum, "$" + totalS));
+                      invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), sNum, "$" + totalS));
                       invoiceWriter.write("\n");
                   
                   }
@@ -156,28 +155,28 @@ public class EnterSellDisplay{
                 double total = temp.getSalesPrice() * num;
                 
                 finalTotal += total;
-                String totalS = df.format(total);
+                String totalS = String.format("%.2f", total);
                 String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
                 if(!invoiceMade) 
                 {
               	  invoiceWriter.write(invoice);
               	  invoiceMade = true;
                 }
-                invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getSalesPrice()), sNum, "$" + totalS));
+                invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                 invoiceWriter.write("\n");
                 }
                 else 
                 {
               	    double total = temp.getListPrice() * num;
               	    finalTotal += total;  
-              	    String totalS = df.format(total);
+              	    String totalS = String.format("%.2f", total);                
                     String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
                     if(!invoiceMade) 
                     {
                   	  invoiceWriter.write(invoice);
                   	  invoiceMade = true;
                     }
-                    invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + df.format(temp.getListPrice()), sNum,  "$" + totalS));
+                    invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getListPrice()), sNum,  "$" + totalS));
                     invoiceWriter.write("\n");
                 }
             	  int dif = temp.getQuantity() - num;
@@ -196,7 +195,7 @@ public class EnterSellDisplay{
             cont = false;
             if(invoiceMade) 
             {
-            	String finalTotalS = df.format(finalTotal);
+            	String finalTotalS = String.format("%.2f", finalTotal);
             	String form2 = "%-92s";
             	invoiceWriter.write(String.format(form2, "Total:") + "$" + finalTotalS + "\n\nReceived by: " + client +"\n\n\n");
             }

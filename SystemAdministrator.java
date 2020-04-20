@@ -35,8 +35,9 @@ public class SystemAdministrator extends Employee{
 /*Deletes an existing account by setting the Employee object to null
 *@param a The account to be deleted
 */
-   public void deleteAccount(Employee a){
+   public Employee deleteAccount(Employee a){
       a = null;
+      return a;
    }
    
    public SalesAssociate addSalesVan(String fn, String ln, String email, 

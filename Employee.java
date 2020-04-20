@@ -56,6 +56,14 @@ public class Employee{
    public void setUsername(String un){
       this.username = un;
    }
+   
+/*Returns the Employee's password
+*@return The Employee's password
+*/
+   public String getPassword(){
+      return password;
+   }
+   
  /*Returns the account's type
 *@return The account type
 */      

@@ -9,6 +9,7 @@
 
 //MAKING THIS ASSUMING THAT THERE ISN'T AN OVERARCHING EMPLOYEE CLASS. THAT
 //IS SUBJECT TO CHANGE
+import java.io.IOException;
 public class SystemAdministrator extends Employee{
    
    public SystemAdministrator(String fn, String ln, String email, String un,
@@ -41,7 +42,8 @@ public class SystemAdministrator extends Employee{
    }
    
    public SalesAssociate addSalesVan(String fn, String ln, String email, 
-   String un, String password, String van){//ADD A LINKEDLIST FOR THE INVENTORY?
+   String un, String password, String van) throws IOException{//ADD A LINKEDLIST FOR THE INVENTORY?
+      Importer.writeEmptyFile(van);
       return new SalesAssociate(fn, ln, email, un, password, van);
    }  
    

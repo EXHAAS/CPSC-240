@@ -31,15 +31,17 @@ public class MainMethod{
       // Boolean for signing in.
       boolean again = true;
       
-    SalesAssociate x = new SalesAssociate("Bob","Bobby","email","user","pass","S.txt"); // Account for testing
-    SystemAdministrator s = new SystemAdministrator("Bob","Bobby","email","user2","pass2");  
-    accounts.add(x);
-    accounts.add(s);   
+      accounts = (Accounts.Employees());
+      
+    //SalesAssociate x = new SalesAssociate("Bob","Bobby","email","user","pass","S.txt"); // Account for testing
+    //SystemAdministrator s = new SystemAdministrator("Bob","Bobby","email","user2","pass2");  
+    //accounts.add(x);
+    //accounts.add(s);   
       Employee ac = null;
       while(running == true) 
       {
       
-      while(again) 
+      while(again == true) 
       {
       System.out.println("Enter Username:");
       String username = reader.next();

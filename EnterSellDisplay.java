@@ -10,7 +10,6 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Date;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.io.FileWriter;
@@ -49,7 +48,7 @@ public class EnterSellDisplay{
 	   String date = form.format(time).toString();
 	   
 	   String invoice =  "Sales Associate: " + sa.getFirstName() + " " + sa.getLastName() + "\n" 
-	   + "Sales Invoice for " + shopName + " " + date + "\nName                   Number                 Price                 Sold                    Total\n" ;
+	   + "Sales Invoice for " + shopName + " " + date + "\nName                   Number                 Price                 Sale Price            Sold                  Total\n" ;
 	  
 	   
                   
@@ -108,13 +107,13 @@ public class EnterSellDisplay{
                   double total = temp.getSalesPrice() * num;
                   finalTotal += total;
                   String totalS = String.format("%.2f", total);                
-                  String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                  String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
                   if(!invoiceMade) 
                   {
                 	  invoiceWriter.write(invoice);
                 	  invoiceMade = true;
                   }
-                  invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                  invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                   invoiceWriter.write("\n");
               
                   }
@@ -124,13 +123,13 @@ public class EnterSellDisplay{
                       finalTotal += total;
                 	  String totalS = String.format("%.2f", total);                
 
-                	  String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                	  String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
                       if(!invoiceMade) 
                       {
                     	  invoiceWriter.write(invoice);
                     	  invoiceMade = true;
                       }
-                      invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), sNum, "$" + totalS));
+                      invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                       invoiceWriter.write("\n");
                   
                   }
@@ -156,13 +155,13 @@ public class EnterSellDisplay{
                 
                 finalTotal += total;
                 String totalS = String.format("%.2f", total);
-                String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
                 if(!invoiceMade) 
                 {
               	  invoiceWriter.write(invoice);
               	  invoiceMade = true;
                 }
-                invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()) , "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                 invoiceWriter.write("\n");
                 }
                 else 
@@ -170,13 +169,13 @@ public class EnterSellDisplay{
               	    double total = temp.getListPrice() * num;
               	    finalTotal += total;  
               	    String totalS = String.format("%.2f", total);                
-                    String invoiceFormat = "%-22s %-22s %-22s %-22s %-22s";
+                    String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
                     if(!invoiceMade) 
                     {
                   	  invoiceWriter.write(invoice);
                   	  invoiceMade = true;
                     }
-                    invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getListPrice()), sNum,  "$" + totalS));
+                    invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum,  "$" + totalS));
                     invoiceWriter.write("\n");
                 }
             	  int dif = temp.getQuantity() - num;
@@ -196,7 +195,7 @@ public class EnterSellDisplay{
             if(invoiceMade) 
             {
             	String finalTotalS = String.format("%.2f", finalTotal);
-            	String form2 = "%-92s";
+            	String form2 = "%-112s";
             	invoiceWriter.write(String.format(form2, "Total:") + "$" + finalTotalS + "\n\nReceived by: " + client +"\n\n\n");
             }
             invoiceWriter.close();

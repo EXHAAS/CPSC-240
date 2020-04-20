@@ -65,7 +65,7 @@ public class MainMethod{
     	//PRINT THE USERS CHOICES, THEN LET THEM ENTER THEIR CHOICE
           System.out.println("\nhello " + ac.getFirstName() + " " + ac.getLastName()+ "\n");
     	  
-    	  if(ac.getType().equals("SystemAdministrator")) 
+    	  if(ac.getType() == 1) 
 	  {
         	
     	  System.out.println("Please select your option from the following menu:");
@@ -74,7 +74,7 @@ public class MainMethod{
     	  System.out.println("Enter your choice:");
     	  
     	  }
-    	  if(ac.getType().equals("OfficeManager")) 
+    	  if(ac.getType() == 2) 
 	  {
         	  
     	  System.out.println("Please select your option from the following menu:");
@@ -86,7 +86,7 @@ public class MainMethod{
     	  System.out.println("Quit:");
     	  
     	  }
-    	  if(ac.getType().equals("WarehouseManager")) 
+    	  if(ac.getType() == 3) 
 	  {
     	  
     	  System.out.println("Please select your option from the following menu:");
@@ -99,7 +99,7 @@ public class MainMethod{
 	  System.out.println("Enter your choice:");
 
     	  }
-	  if(ac.getType().equals("SalesAssociate")) 
+	  if(ac.getType() == 4) 
 	  {
 	      
 	  System.out.println("Please select your option from the following menu:");
@@ -122,7 +122,7 @@ public class MainMethod{
  //CALL WHICHEVER METHOD THE READER CHOSE. LOOP UNTIL QUIT IS CHOSEN           
          switch(choice.toUpperCase()){
             case "READ":  
-               if(ac.getType().equals("WarehouseManager")) 
+               if(ac.getType() == 3) 
                {          	   
                totalInvLL = ReadInventory.readInventory(bikeLL, totalInvLL,reader);              
                Writer.Write("totalinventory.txt", totalInvLL);
@@ -135,7 +135,7 @@ public class MainMethod{
 	       break;
 
             case "SELL":
-               if(ac.getType().equals("SalesAssociate")) 
+               if(ac.getType() == 4) 
                {
                totalInvLL = EnterSellDisplay.sellPart(reader,totalInvLL, ac);
                Writer.Write("totalinventory.txt", totalInvLL);
@@ -152,7 +152,7 @@ public class MainMethod{
                break;
  	    
 	         case "SORTNAME":
-               if(ac.getType().equals("WarehouseManager") || ac.getType().equals("OfficeManager")) 
+               if(ac.getType() == 3 || ac.getType() == 2) 
                {
 	           SortNameNumber.sortNameNumber(choice, reader);
                }
@@ -163,7 +163,7 @@ public class MainMethod{
                break;
 
             case "SORTNUMBER":
-            	if(ac.getType().equals("WarehouseManager") || ac.getType().equals("OfficeManager")) 
+            	if(ac.getType() == 3 || ac.getType() == 2) 
                 {
  	           SortNameNumber.sortNameNumber(choice, reader);
                 }
@@ -182,7 +182,7 @@ public class MainMethod{
                 break;
                 
              case "LOADINVENTORY":
-                if(ac.getType().equals("SalesAsscociate")) 
+                if(ac.getType() == 4) 
                 {
             	Fleet.printFleet();
                 System.out.println("warehouseDB.txt");

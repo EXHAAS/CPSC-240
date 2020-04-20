@@ -54,7 +54,7 @@ public class Accounts
         while (flag == 0) {
         //out.println 
         currentOm = omIt.next();
-        out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + "password");
+        out.println("OM`" +currentOm.getFirstName() + "`" + currentOm.getLastName() + "`" + currentOm.getEmail() + "`" + currentOm.getUsername() + "`" + currentOm.getPassword());
         }
     }
     catch (java.util.NoSuchElementException exception){
@@ -74,7 +74,7 @@ public class Accounts
         while (flag == 0) {
         //out.println 
         currentAdmin = adminIt.next();
-        out.println("ADMIN`" +currentAdmin.getFirstName() + "`" + currentAdmin.getLastName() + "`" + currentAdmin.getEmail() + "`" + currentAdmin.getUsername() + "`" + "password");
+        out.println("ADMIN`" +currentAdmin.getFirstName() + "`" + currentAdmin.getLastName() + "`" + currentAdmin.getEmail() + "`" + currentAdmin.getUsername() + "`" + currentAdmin.getPassword());
         }
     }
     catch (java.util.NoSuchElementException exception){
@@ -83,8 +83,8 @@ public class Accounts
     }
     
     
-      ListIterator<SystemSaleistrator> saleIt = saleList.listIterator(); 
-      SystemSaleistrator currentSale; 
+      ListIterator<SalesAssociate> saleIt = saleList.listIterator(); 
+      SalesAssociate currentSale; 
       
         aqq = 0;
         flag = 0;
@@ -92,7 +92,7 @@ public class Accounts
         while (flag == 0) {
         //out.println 
         currentSale = saleIt.next();
-        out.println("SALE`" +currentSale.getFirstName() + "`" + currentSale.getLastName() + "`" + currentSale.getEmail() + "`" + currentSale.getUsername() + "`" + "password");
+        out.println("SALE`" +currentSale.getFirstName() + "`" + currentSale.getLastName() + "`" + currentSale.getEmail() + "`" + currentSale.getUsername() + "`" + currentSale.getPassword() + currentSale.getVan());
         }
     }
     catch (java.util.NoSuchElementException exception){
@@ -100,8 +100,8 @@ public class Accounts
         
     }
     
-      ListIterator<SystemWMistrator> wmIt = wmList.listIterator(); 
-      SystemWMistrator currentWM; 
+      ListIterator<WarehouseManager> wmIt = wmList.listIterator(); 
+      WarehouseManager currentWM; 
       
         aqq = 0;
         flag = 0;
@@ -109,7 +109,7 @@ public class Accounts
         while (flag == 0) {
         //out.println 
         currentWM = wmIt.next();
-        out.println("WM`" +currentWM.getFirstName() + "`" + currentWM.getLastName() + "`" + currentWM.getEmail() + "`" + currentWM.getUsername() + "`" + "password");
+        out.println("WM`" +currentWM.getFirstName() + "`" + currentWM.getLastName() + "`" + currentWM.getEmail() + "`" + currentWM.getUsername() + "`" + currentWM.getPassword());
         }
     }
     catch (java.util.NoSuchElementException exception){
@@ -325,6 +325,7 @@ public class Accounts
         
         String raw;
         String[] rawList;
+        //rawList = new String [7];
         
         try {      //try block to check for end of file
           
@@ -334,11 +335,11 @@ public class Accounts
          rawList = raw.split("`");
          //b2 = Double.parseDouble(rawList[2]);
          //b3 = Double.parseDouble(rawList[3]);
-         if (rawList[0].toUpperCase().equals("ADMIN")){
-        SalesAssociate sale = new SalesAssociate(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5]); 
+         if (rawList[0].toUpperCase().equals("SALE")){
+        SalesAssociate sale = new SalesAssociate(rawList[1],rawList[2],rawList[3],rawList[4],rawList[5],rawList[6]); 
         saleList.addLast(sale);
         
-        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5]); 
+        System.out.println(rawList[1] + rawList[2] + rawList[3] + rawList[4] + rawList[5] + rawList[6]); 
         }
         
         //b5 = (int) Double.parseDouble(rawList[5]); 

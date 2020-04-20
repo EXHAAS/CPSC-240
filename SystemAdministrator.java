@@ -14,7 +14,6 @@ public class SystemAdministrator extends Employee{
    public SystemAdministrator(String fn, String ln, String email, String un,
       String password){
       super(fn, ln, email, un, password);
-      this.type = "SystemAdministrator";
    }
 
 /*Creates and returns an OfficeManager object
@@ -43,6 +42,10 @@ public class SystemAdministrator extends Employee{
    public SalesAssociate addSalesVan(String fn, String ln, String email, 
    String un, String password, String van){//ADD A LINKEDLIST FOR THE INVENTORY?
       return new SalesAssociate(fn, ln, email, un, password, van);
-   }     
+   }  
+   
+   public int getType(){
+      return 1;
+   }    
 }
       

@@ -13,10 +13,13 @@ public class SalesAssociate extends Employee{
 	SalesAssociate(String firstName, String lastName, String email, String username, String password,String van) {
 		super(firstName, lastName, email, username, password);
 		this.van = van;
-		this.type = "SalesAssociate";
 	}
 	
 	 public String getVan() {
 		 return this.van;
 	 }
+    
+   public int getType(){
+      return 4;
+   }     
 }

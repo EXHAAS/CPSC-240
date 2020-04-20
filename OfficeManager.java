@@ -34,6 +34,10 @@ public class OfficeManager extends Employee
         
     }
     
+   public int getType(){
+      return 2;
+   } 
+    
 
 
     

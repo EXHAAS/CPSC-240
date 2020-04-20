@@ -11,7 +11,6 @@ public class Employee{
    String email;
    String username;
    String password;
-   String type;
    
    public Employee(String fn, String ln, String email, String un,
       String password){
@@ -60,8 +59,8 @@ public class Employee{
  /*Returns the account's type
 *@return The account type
 */      
-   public String getType(){
-      return type;
+   public int getType(){
+      return 0;
    }  
   /*
   *Checks if given password and username match the fields of the employee object.

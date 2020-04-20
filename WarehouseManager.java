@@ -10,7 +10,10 @@ public class WarehouseManager extends Employee {
 
 	public WarehouseManager(String fn, String ln, String email, String un, String password) {
 		super(fn, ln, email, un, password);
-		this.type = "WarehouseManager";
 	}
+   
+   public int getType(){
+      return 3;
+   } 
 
 }

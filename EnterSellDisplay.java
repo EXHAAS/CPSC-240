@@ -30,11 +30,21 @@ public class EnterSellDisplay{
    public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL, Employee ac) throws IOException{
 	   // String to format total in invoices
 	   // Used to append new invoices to Invoice.txt file
-	   FileWriter invoiceWriter = new FileWriter("Invoices.txt",true);
+	   
+	   SalesAssociate sa = (SalesAssociate)ac;
+	   String vanInvoices = sa.getVan() + " " + "Transactions.txt";
+	    
+	   FileWriter invoiceWriter = new FileWriter(vanInvoices,true);
+	   FileWriter invW = null;
+	   
 	   s.nextLine();
 	   Date time = new Date();
-       SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
-       SalesAssociate sa = (SalesAssociate)ac;
+       
+	   SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
+       SimpleDateFormat formInv = new SimpleDateFormat("dd_MM_yyyy");
+       
+      
+
        // Keeps track of final total of the transaction
        double finalTotal = 0;
        String whName = sa.getVan();
@@ -46,9 +56,38 @@ public class EnterSellDisplay{
 	   String client = s.nextLine();
 	   
 	   String date = form.format(time).toString();
+	   String invDate = formInv.format(time).toString();
 	   
 	   String invoice =  "Sales Associate: " + sa.getFirstName() + " " + sa.getLastName() + "\n" 
 	   + "Sales Invoice for " + shopName + " " + date + "\nName                   Number                 Price                 Sale Price            Sold                  Total\n" ;
+	   boolean makeInvoice = false;
+	   boolean again = true;
+	   while(again) {
+	   System.out.println("Generate Invoice?\n[1]: Yes\n[2]: No");
+   	   String answer = s.nextLine(); 
+   	   
+   	   if(answer.equals("1")) 
+   	   {
+   			
+   			String vanInvoice = sa.getVan() + " Invoice for " + shopName + " " + invDate + ".txt";
+   			File vi = new File(vanInvoice);
+   			vi.createNewFile();
+   			
+   			invW = new FileWriter(vanInvoice);
+   			invW.write(invoice);
+   			again = false;
+   			makeInvoice = true;
+   	   }
+   	   else if(answer.equals("2"))
+   	   {
+   		   again = false;
+   	   }
+   	   else 
+   	   {
+   		   System.out.println("Invalid Input");
+   	   }
+   	   }
+	   
 	  
 	   
                   
@@ -61,7 +100,7 @@ public class EnterSellDisplay{
       // Boolean to keep track if more items are to be sold  
       boolean cont = true;
       // Boolean to keep track if a new invoice was made
-      boolean invoiceMade = false;
+      boolean transactionMade = false;
       while(cont == true)
       {
          System.out.println("Current Inventory:\n");      
@@ -108,13 +147,18 @@ public class EnterSellDisplay{
                   finalTotal += total;
                   String totalS = String.format("%.2f", total);                
                   String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
-                  if(!invoiceMade) 
+                  if(!transactionMade) 
                   {
                 	  invoiceWriter.write(invoice);
-                	  invoiceMade = true;
+                	  transactionMade = true;
                   }
                   invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                   invoiceWriter.write("\n");
+                  if(makeInvoice) 
+                  {
+                      invW.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                      invW.write("\n");
+                  }
               
                   }
                   else 
@@ -124,13 +168,18 @@ public class EnterSellDisplay{
                 	  String totalS = String.format("%.2f", total);                
 
                 	  String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
-                      if(!invoiceMade) 
+                      if(!transactionMade) 
                       {
                     	  invoiceWriter.write(invoice);
-                    	  invoiceMade = true;
+                    	  transactionMade = true;
                       }
                       invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                       invoiceWriter.write("\n");
+                      if(makeInvoice) 
+                      {
+                          invW.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                          invW.write("\n");
+                      }
                   
                   }
                   
@@ -156,13 +205,18 @@ public class EnterSellDisplay{
                 finalTotal += total;
                 String totalS = String.format("%.2f", total);
                 String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
-                if(!invoiceMade) 
+                if(!transactionMade) 
                 {
               	  invoiceWriter.write(invoice);
-              	  invoiceMade = true;
+              	  transactionMade = true;
                 }
                 invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()) , "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
                 invoiceWriter.write("\n");
+                if(makeInvoice) 
+                {
+                    invW.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                    invW.write("\n");
+                }
                 }
                 else 
                 {
@@ -170,13 +224,18 @@ public class EnterSellDisplay{
               	    finalTotal += total;  
               	    String totalS = String.format("%.2f", total);                
                     String invoiceFormat = "%-22s %-22s %-22s %-22s %-19s %-22s";
-                    if(!invoiceMade) 
+                    if(!transactionMade) 
                     {
                   	  invoiceWriter.write(invoice);
-                  	  invoiceMade = true;
+                  	  transactionMade = true;
                     }
                     invoiceWriter.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f", temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum,  "$" + totalS));
                     invoiceWriter.write("\n");
+                    if(makeInvoice) 
+                    {
+                        invW.write(String.format(invoiceFormat, temp.getName(), temp.getNumber(), "$" + String.format("%.2f",temp.getListPrice()), "$" + String.format("%.2f", temp.getSalesPrice()), sNum, "$" + totalS));
+                        invW.write("\n");
+                    }
                 }
             	  int dif = temp.getQuantity() - num;
 
@@ -192,11 +251,18 @@ public class EnterSellDisplay{
 
          if(ans.equalsIgnoreCase("exit")){
             cont = false;
-            if(invoiceMade) 
+            if(transactionMade) 
             {
             	String finalTotalS = String.format("%.2f", finalTotal);
             	String form2 = "%-112s";
             	invoiceWriter.write(String.format(form2, "Total:") + "$" + finalTotalS + "\n\nReceived by: " + client +"\n\n\n");
+            	if(makeInvoice) 
+                {
+            	invW.write(String.format(form2, "Total:") + "$" + finalTotalS + "\n\nReceived by: " + client +"\n\n\n");
+            	invW.close();
+                }
+            	
+            	
             }
             invoiceWriter.close();
            

@@ -218,17 +218,18 @@ public class EnterSellDisplay{
 *@param s The Scanner passed in from the main method 
 *@param l The inventory LinkedList being searched through
 */
-   public static void displayPart(Scanner s) throws IOException{
+   public static BikePart displayPart(Scanner s) throws IOException{
       System.out.println("Enter the name of the warehouse:");
       String whName = s.next();
       
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
+      BikePart temp = null;
       
       if(houseList.size() != 0){
          System.out.println("Enter the name or number of the part:");
          String name = s.next();
          
-         BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
+         temp = SearchBikePartList.searchBikePartList(houseList, name);
          
          if(temp != null){
             System.out.println("The name is: " + temp.getName());
@@ -250,6 +251,7 @@ public class EnterSellDisplay{
       }else{
          System.out.println("There was nothing there!\n\n");
       }
+      return temp;
    }   
    
 /**

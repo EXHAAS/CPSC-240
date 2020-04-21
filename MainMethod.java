@@ -150,7 +150,7 @@ public class MainMethod{
             case "DISPLAY":
             	if(ac.getType()==3 || ac.getType()==2) 
             	{
-            		EnterSellDisplay.displayPart(reader);
+            		BikePart no = EnterSellDisplay.displayPart(reader);
             	}
             	else 
                 {

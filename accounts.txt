@@ -1,8 +1,1 @@
-OM`bob`maqua`bob@bob.com`RubberDuck9000`password
-OM`bub`maqua`bob@bob.com`RubberDuck9999`password
-OM`bib`maqua`bob@bob.com`RubberDuck9023`password
-OM`bib`maqua`bob@bob.com`RubberDuck9690`password
-ADMIN`biib`maqua`bob@bob.com`RubberDuck69`pawoqrd
-WM`baeb`maqua`bob@bob.com`RubberDuck12345`paworrd
-SALE`büb`maqua`bob@bob.com`RubberDuck345`pawordh`warehouse.txt
-ADMIN`böb`maqua`bob@bob.com`RubberDuck23456`Xhü'Ôülth
+﻿ADMIN`Bob`Maqua`bob@bob.com`admin`nmida

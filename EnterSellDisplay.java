@@ -225,17 +225,22 @@ public class EnterSellDisplay{
       LinkedList<BikePart> houseList = Importer.Import(whName, 1);
       
       if(houseList.size() != 0){
-         System.out.println("Enter the name of the part:");
+         System.out.println("Enter the name or number of the part:");
          String name = s.next();
          
          BikePart temp = SearchBikePartList.searchBikePartList(houseList, name);
          
          if(temp != null){
             System.out.println("The name is: " + temp.getName());
+            System.out.println("The number is: " + temp.getNumber());
             if(temp.getOnSale() == true){
-               System.out.println("The price is: " + temp.getSalesPrice() + "\n\n");
+               System.out.println("The price is: " + temp.getSalesPrice());
+               System.out.println("This part is on sale");
+               System.out.println("There are " + temp.getQuantity() + " parts in the warehouse\n\n");
             }else{
-               System.out.println("The price is: " + temp.getListPrice() + "\n\n");
+               System.out.println("The price is: " + temp.getListPrice());
+               System.out.println("This part is not on sale");
+               System.out.println("There are " + temp.getQuantity() + " parts in the warehouse\n\n");
             }
          }else{
             System.out.println("The part is not in the system.\n\n");

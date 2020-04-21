@@ -10,7 +10,7 @@
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.io.IOException;
-
+import java.util.Iterator;
 
 public class MainMethod{
    
@@ -71,7 +71,8 @@ public class MainMethod{
    
     	  System.out.println("Please select your option from the following menu:");
     	  System.out.println("Create: Create new account");
-          System.out.println("Logout: Sign off");
+        System.out.println("Delete: Delete an account");
+        System.out.println("Logout: Sign off");
     	  System.out.println("Quit:");
     	  System.out.println("Enter your choice:");
     	  
@@ -256,6 +257,29 @@ public class MainMethod{
             	}
          		
             	break;
+             
+             case "DELETE":
+               System.out.println("Which account would you like to delete?");
+               Iterator<Employee> accIter = accounts.iterator();
+               int count = 0;
+               while(accIter.hasNext()){
+                  Employee temp = accIter.next();
+                  System.out.println(count + ": " + temp.getFirstName() + " "
+                  + temp.getLastName());
+                  count++;
+               }
+               
+               int delete = reader.nextInt();
+                
+               if(delete >= 0 && delete <= accounts.size()){
+                  accounts.remove(delete);
+                  System.out.println("The account has been deleted");
+               }else{
+                  System.out.println("That isn't a valid number");
+               }
+               
+               Accounts.writeAccount(accounts);
+               break;
             
              case "LOADINVENTORY":
                 if(ac.getType()==4) 
@@ -265,10 +289,7 @@ public class MainMethod{
                 System.out.println("Which warehouse are you receiving inventory from?");
                 String moveFile = reader.next();
                 LinkedList<BikePart> move = Van.chooseParts(moveFile, reader);
-
-                Fleet.printFleet();
-                System.out.println("warehouseDB.txt");
-                System.out.println("Which file would you like to move to?");               
+               
                 String toFile = ((SalesAssociate) ac).getVan();
                 
                 Van.editFile(toFile, move);

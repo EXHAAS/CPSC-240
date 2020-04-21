@@ -31,8 +31,19 @@ public class EnterSellDisplay{
 	   // String to format total in invoices
 	   // Used to append new invoices to Invoice.txt file
 	   
+	   File fp1 = new File("Transactions/");
+	   if(!(fp1.exists())) {
+		   new File("Transactions/").mkdirs();
+	   }
+	   
+	   File fp2 = new File("Transactions/Invoices/");
+	   if(!(fp2.exists())) {
+		   new File("Transactions/Invoices/").mkdirs();
+	   }
+
+	   
 	   SalesAssociate sa = (SalesAssociate)ac;
-	   String vanInvoices = sa.getVan() + " " + "Transactions.txt";
+	   String vanInvoices = "Transactions/" + sa.getVan() + " " + "Transactions.txt";
 	    
 	   FileWriter invoiceWriter = new FileWriter(vanInvoices,true);
 	   FileWriter invW = null;
@@ -69,7 +80,7 @@ public class EnterSellDisplay{
    	   if(answer.equals("1")) 
    	   {
    			
-   			String vanInvoice = sa.getVan() + " Invoice for " + shopName + " " + invDate + ".txt";
+   			String vanInvoice = "Transactions/Invoices/" + sa.getVan() + " Invoice for " + shopName + " " + invDate + ".txt";
    			File vi = new File(vanInvoice);
    			vi.createNewFile();
    			

@@ -30,6 +30,7 @@ public class EnterSellDisplay{
    public static LinkedList<BikePart> sellPart(Scanner s, LinkedList<BikePart> totalInvLL, Employee ac) throws IOException{
 	   // String to format total in invoices
 	   // Used to append new invoices to Invoice.txt file
+	   SalesAssociate sa = (SalesAssociate)ac;
 	   
 	   File fp1 = new File("Transactions/");
 	   if(!(fp1.exists())) {
@@ -41,8 +42,11 @@ public class EnterSellDisplay{
 		   new File("Transactions/Invoices/").mkdirs();
 	   }
 
-	   
-	   SalesAssociate sa = (SalesAssociate)ac;
+	   File fp3 = new File("Transactions/Invoices/" + sa.getVan() + " Invoices/");
+	   if(!(fp3.exists())) {
+		   new File("Transactions/Invoices/" + sa.getVan() + " Invoices/").mkdirs();
+	   }
+	  
 	   String vanInvoices = "Transactions/" + sa.getVan() + " " + "Transactions.txt";
 	    
 	   FileWriter invoiceWriter = new FileWriter(vanInvoices,true);
@@ -80,7 +84,7 @@ public class EnterSellDisplay{
    	   if(answer.equals("1")) 
    	   {
    			
-   			String vanInvoice = "Transactions/Invoices/" + sa.getVan() + " Invoice for " + shopName + " " + invDate + ".txt";
+   			String vanInvoice = "Transactions/Invoices/" + sa.getVan() + " Invoices/" + sa.getVan() + " Invoice for " + shopName + " " + invDate + ".txt";
    			File vi = new File(vanInvoice);
    			vi.createNewFile();
    			

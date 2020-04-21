@@ -259,7 +259,8 @@ public class MainMethod{
             	break;
              
              case "DELETE":
-               System.out.println("Which account would you like to delete?");
+               if(ac.getType()==1){
+	       System.out.println("Which account would you like to delete?");
                Iterator<Employee> accIter = accounts.iterator();
                int count = 0;
                while(accIter.hasNext()){
@@ -279,6 +280,11 @@ public class MainMethod{
                }
                
                Accounts.writeAccount(accounts);
+	       }
+	       else 
+               {
+             	   System.out.println("Invalid Command");
+               }	 
                break;
             
              case "LOADINVENTORY":

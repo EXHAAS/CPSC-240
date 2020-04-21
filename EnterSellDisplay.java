@@ -41,7 +41,7 @@ public class EnterSellDisplay{
 	   Date time = new Date();
        
 	   SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss\n\n");
-       SimpleDateFormat formInv = new SimpleDateFormat("dd_MM_yyyy");
+       SimpleDateFormat formInv = new SimpleDateFormat("dd_MM_yyyy - HH.mm.ss");
        
       
 

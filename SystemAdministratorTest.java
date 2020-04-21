@@ -2,6 +2,7 @@ import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.io.IOException;
 
 
 public class SystemAdministratorTest {
@@ -49,7 +50,7 @@ public class SystemAdministratorTest {
       
    }
    
-   @Test public void testDeleteAccount(){
+   @Test public void testDeleteAccount() throws IOException{
       SystemAdministrator testAdmin = new SystemAdministrator("James", "Bond",
       "bondman@verizon.net", "Double_O 7", "eu*iSe45");
          
@@ -61,7 +62,7 @@ public class SystemAdministratorTest {
       assertEquals(null, test);     
    }
    
-   @Test public void testAddSalesVan(){
+   @Test public void testAddSalesVan() throws IOException{
       SystemAdministrator testAdmin = new SystemAdministrator("James", "Bond",
       "bondman@verizon.net", "Double_O 7", "eu*iSe45");
          
